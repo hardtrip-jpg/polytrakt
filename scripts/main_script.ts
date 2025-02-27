@@ -1,0 +1,1 @@
+const test_compile_var = 10;
