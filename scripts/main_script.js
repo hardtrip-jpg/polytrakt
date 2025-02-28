@@ -1,9 +1,14 @@
 "use strict";
+//TEMP Script to test things out
 
+
+//Keyboard
 const keyboard = new AudioKeys({
     rows: 1,
 })
 
+
+//Instruments
 const synth1 = new Tone.Synth({
     oscillator: {
         type: "sine",
@@ -23,6 +28,8 @@ const instrumentList = [
 let currentSynth = synth1
 
 
+
+//User Activated input
 window.onload = function() {
     const testButton = document.getElementById("test-button");
 
@@ -39,6 +46,11 @@ keyboard.down((key) => {
     currentSynth.triggerAttackRelease(key.frequency, "8n");
 })
 
+
+
+
+
+//Function called by HTML
 function changeInstrument(id){
     currentSynth = instrumentList[id];
 }
