@@ -7,4 +7,8 @@ class Inventory {
         this.list.push(instrument)
     }
 
+    matchInstrument(id){
+        return this.list[id];
+    }
+
 }

@@ -1,7 +1,5 @@
 "use strict";
 
-let testInventory = new Inventory()
-
 //TEMP Script to test things out
 let playState = false
 
@@ -13,44 +11,19 @@ const keyboard = new AudioKeys({
 })
 
 
-//Instruments
-const synth1 = new Tone.Synth({
-    oscillator: {
-        type: "sine",
-    },
-}).toDestination();
-const synth2 = new Tone.Synth({
-    oscillator: {
-        type: "square",
-    },
-}).toDestination();
+let allTracks = [];
+let inventory = new Inventory();
 
-const instrumentList = [
-    synth1,
-    synth2
-];
 
-const patternList = [
-    ["C5", "B5", "C5"],
-    ["D3","D4","D5","D4","D3","D4","D5"],
-];
+// let track1 = new Tone.Loop((time) => {
+//     playNote(time);
+// }, currentTransportTime).start(0);
+// let currentNote = 0;
 
-let currentSynth = instrumentList[0];
 
-let currentBPM = 140.0;
 
-let currentPattern = patternList[0];
-
-let currentTransportTime = updateTransportTime();
-
-let track1 = new Tone.Loop((time) => {
-    playNote(time);
-}, currentTransportTime).start(0);
-let currentNote = 0;
-//User Activated input
 window.onload = function() {
-    
-    changePattern(0);
+    inventory.addInstrument("bass_boom.wav");
     const testButton = document.getElementById("test-button");
 
     testButton.addEventListener("click", playButton); 
@@ -62,9 +35,6 @@ keyboard.down((key) => {
 })
 
 
-function updateTransportTime(){
-    return `${currentPattern.length}n`;
-}
 
 function playButton(){
     if (Tone.context.state != "running"){
@@ -76,33 +46,8 @@ function playButton(){
         playState = false;
     }
     else{
-        console.log(track1)
         playState = true;
         Tone.getTransport().start();
     }
-   // currentSynth.triggerAttackRelease("C4", "8n");
 
-}
-
-function playNote(time){
-    if (currentNote >= currentPattern.length){
-        currentNote = 0;
-    }
-    currentSynth.triggerAttackRelease(currentPattern[currentNote],"8n", time);
-    currentNote++;
-}
-
-
-//Function called by HTML
-function changeInstrument(id){
-    currentSynth = instrumentList[id];
-}
-
-function changePattern(id){
-    currentPattern = patternList[id];
-    currentTransportTime = updateTransportTime();
-    track1.interval = currentTransportTime;
-    playState = true;
-    playButton();
-    console.log(currentTransportTime)
 }
