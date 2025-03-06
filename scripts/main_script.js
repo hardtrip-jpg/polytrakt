@@ -1,4 +1,7 @@
 "use strict";
+
+let testInventory = new Inventory()
+
 //TEMP Script to test things out
 let playState = false
 
@@ -82,7 +85,6 @@ function playButton(){
 }
 
 function playNote(time){
-    console.log("1")
     if (currentNote >= currentPattern.length){
         currentNote = 0;
     }
@@ -99,7 +101,8 @@ function changeInstrument(id){
 function changePattern(id){
     currentPattern = patternList[id];
     currentTransportTime = updateTransportTime();
-    currentNote = 0;
     track1.interval = currentTransportTime;
+    playState = true;
+    playButton();
     console.log(currentTransportTime)
 }
