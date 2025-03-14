@@ -5,25 +5,60 @@
     <title>Polytrakt</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.3/Tone.js"></script>
     <script src="scripts/audiokeys.min.js"></script>
-    <script src="scripts/visualizer.js"></script>
     <script src="scripts/pattern.js"></script>
-    <script src="scripts/instrument.js"></script>
     <script src="scripts/inventory.js"></script>
     <script src="scripts/track.js"></script>
-    <script src="scripts/signals.js"></script>
-    <script src="scripts/main_script.js"></script>
+    <script src="scripts/logic_manager.js"></script>
+    <script src="scripts/ui_manager.js"></script>
 </head>
 
 <body>
-    <h1>
-        POLYTRAKT
-    </h1>
-    <button id="test-button">Play Sound</button>
-    <p>Boom - 00</p>
+    <header>
+        <h1>
+            <marquee>POLYTRAKT</marquee>
+        </h1>
+    </header>
+
+
+    <div class="top-bar">
+        <div id="playhead-controls">
+            <button id="play-button">Play</button>
+        </div>
+        <br>
+        Patterns
+        <div id="pattern-holders">
+            <button id="pattern-button" data-pattern="0">0</button>
+            <button id="pattern-button" data-pattern="1">1</button>
+            <button id="pattern-button" data-pattern="2">2</button>
+            <button id="remove-pattern-button">-</button>
+            <button id="add-pattern-button">+</button>
+        </div>
+    </div>
     <br>
+    Tracks
     <div id="main-view">
+        <div id="track-1" class="track">
+            <button id="remove-div" data-track="track-1">-</button>
+            <button id="add-div" data-track="track-1">+</button>
+            <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+            <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+            <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+            <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+            <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+        </div>
+        <button id="add-track-button">+</button>
 
     </div>
+
+    <div class="side-bar">
+        <div id="instrument-list">
+            <p>Boom - 00</p>
+        </div>
+        <div id="browser">
+
+        </div>
+    </div>
+
 </body>
 
 </html>
