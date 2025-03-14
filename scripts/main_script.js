@@ -11,8 +11,8 @@ const keyboard = new AudioKeys({
 })
 
 
-let allTracks = [new Track];
-let inventory = new Inventory();
+let allTracks = [];
+let inventory = new Inventory;
 
 
 // let track1 = new Tone.Loop((time) => {
@@ -23,16 +23,27 @@ let inventory = new Inventory();
 
 
 window.onload = function () {
-    let track1Pattern = allTracks[0].currentPattern;
-    track1Pattern.addNote("G3");
-    track1Pattern.addNote("G4");
-    track1Pattern.addNote("G5");
-    track1Pattern.addNote("G2");
+    Tone.Transport.bpm.value = 150;
 
-    inventory.addInstrument("bass_boom.wav");
+    inventory.addInstrument("samples/bass_boom.wav");
+
+    allTracks[0] = new Track
+    let track1Pattern = allTracks[0].currentPattern;
+    track1Pattern.addNote("C1");
+    track1Pattern.addNote("C2");
+    track1Pattern.addNote("C3");
+    track1Pattern.addNote("C4");
+    allTracks[0].currentPlayingSequence.interval = track1Pattern.length;
+
+    
     const testButton = document.getElementById("test-button");
 
     testButton.addEventListener("click", playButton);
+    document.addEventListener("click", () => {
+        if (Tone.context.state != "running") {
+            Tone.start();
+        }
+    });
 }
 
 keyboard.down((key) => {
@@ -43,9 +54,7 @@ keyboard.down((key) => {
 
 
 function playButton() {
-    if (Tone.context.state != "running") {
-        Tone.start();
-    }
+
 
     if (playState) {
         Tone.getTransport().stop();

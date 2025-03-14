@@ -4,11 +4,17 @@ class Inventory {
     }
 
     addInstrument(instrument, id){
-        this.list.push(instrument)
+        let new_instrument = new Tone.Sampler({
+            urls: {
+                C1: instrument,
+            },
+            }).toDestination();
+        this.list.push(new_instrument);
     }
 
     matchInstrument(id){
-        return this.list[id];
+        let check = Number(id)
+        return this.list[check];
     }
 
 }

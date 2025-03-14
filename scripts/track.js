@@ -5,23 +5,25 @@ class Track {
         this.currentNote = 0;
         // this.effectChain = [];
         this.currentDivision = this.currentPattern.length
-        this.currentlyPlayingSequence = new Tone.Loop((time) => {
-            playNote(this.curren, time);
-        }, this.currentDivision).start(0);
+        this.currentPlayingSequence = new Tone.Loop((time) => {
+            this.playNote("00", time);
+        }, `1:${this.currentDivision}`).start(0);
     }
 
-    playNote(instrument, inventory, time) {
+    playNote(instrument, time) {
+        console.log(this.currentPlayingSequence.interval);
 
-        if (currentNote >= currentPattern.length) {
-            currentNote = 0;
+        if (this.currentNote >= this.currentPattern.length) {
+            this.currentNote = 0;
         }
 
         let pitch = this.currentPattern.getPitch(this.currentNote)
 
         if (pitch && instrument) {
-            let currentInstrument = inventory.matchInstrument()
+            let currentInstrument = inventory.matchInstrument("00");
             // this.connectEffects(currentInstrument)
-            currentInstrument.triggerAttackRelease(pitch, instrument, "8n", time);
+            currentInstrument.releaseAll();
+            currentInstrument.triggerAttack(pitch, time);
             // currentInstrument.disconnect();
         }
 
