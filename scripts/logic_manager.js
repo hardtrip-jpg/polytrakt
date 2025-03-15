@@ -85,9 +85,15 @@ window.onload = function () {
 
 //Handles when note is supposed to be played. Just connects instrument and note information provided by sequencer.
 function playNote(time, note) {
-    console.log(note);
-    // let currentInstrument = inventory.matchInstrument("00");
-    // currentInstrument.triggerAttack(note, time);
+    if (note == "XXXX"){
+        return;
+    }
+
+    let pitch = note[0] + note[1];
+    let instrument = note[2] + note[3];
+
+    let currentInstrument = inventory.matchInstrument(instrument);
+    currentInstrument.triggerAttack(pitch, time);
 }
 
 
@@ -106,7 +112,11 @@ function createTextInput(i){
 }
 
 function checkInputedText(){
-    console.log(this.value)
+    if (this.value.length != 4){
+        this.value = "XXXX";
+        console.log ("Please enter 4 digit code");
+        return;
+    }
 }
 
 //Creates a new track
@@ -211,10 +221,12 @@ function setActiveSequences(){
 }
 
 function stop(){
-    console.log("Stopped");
-    Tone.getTransport().stop();
-    playState = false;
-    playButton.textContent = "Play";
+    if (playState){
+        console.log("Stopped");
+        Tone.getTransport().stop();
+        playState = false;
+        playButton.textContent = "Play";
+    }
 }
 
 
