@@ -1,0 +1,171 @@
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6e6e6;
+    color: #333;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+
+}
+
+.sequencer-view {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100vh;
+    width: 100%;
+}
+
+header {
+    background: linear-gradient(to bottom, #a0a0a0 0%, #7d7d7d 100%);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 500;
+}
+
+h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 7px;
+    display: contents;
+}
+
+.top-bar, .side-bar, .main-view {
+    padding: 10px;
+}
+
+.top-bar {
+    background: linear-gradient(to bottom, #f6f6f6 0%, #dedede 100%);
+    border-bottom: 1px solid #aaa;
+    padding: 12px 15px;
+}
+
+.section-header {
+    display: flex;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    justify-content: space-between;
+}
+
+button {
+    background: linear-gradient(to bottom, #ffffff 0%, #dddddd 100%);
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: #333;
+    margin-right: 6px;
+}
+
+button:active {
+    background: linear-gradient(to bottom, #c4c4c4 0%, #e6e6e6 100%);
+}
+
+#playhead-controls {
+    display: inline-block;
+}
+
+#pattern-holders {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#pattern-holders button {
+    margin-right: 5px;
+}
+
+#main-view {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+    height: fit-content;
+
+}
+
+.track {
+    display: flex;
+    margin-bottom: 15px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    justify-content: space-between;
+}
+
+.track-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.track-fields {
+    display: flex;
+    align-items: center;
+    /* flex-grow: 1; */
+    width: 100%;
+}
+
+.track button {
+    margin-right: 4px;
+}
+
+.track input {
+    margin-right: 4px;
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+.side-bar {
+    background: linear-gradient(to bottom, #f6f6f6 0%, #e6e6e6 100%);
+    border-left: 1px solid #aaa;
+    padding: 12px;
+    width: 400px;
+}
+
+#instrument-list, #browser {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+#instrument-list p {
+    margin: 5px 0;
+    font-size: 11px;
+    padding: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#instrument-list p:hover {
+    background-color: #e8e8e8;
+}
+
+#browser {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
