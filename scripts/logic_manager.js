@@ -59,10 +59,6 @@ window.onload = function () {
         })
     }
 
-    //Track Logic
-
-    //initializeTracks();
-
     let addTrackButton = document.querySelector("#add-track-button");
     addTrackButton.addEventListener("click", createTrack);
 
@@ -102,8 +98,13 @@ function createTextInput(i){
     newField.maxLength = "4";
     newField.dataset.track = `track-${i}`;
     newField.value = "XXXX";
-    newField.addEventListener("click", stop)
+    newField.addEventListener("click", stop);
+    newField.addEventListener("blur", checkInputedText)
     return newField;
+}
+
+function checkInputedText(){
+    console.log(this.value)
 }
 
 //Creates a new track
@@ -131,7 +132,7 @@ function createTrack(){
     newRemove.dataset.track = newTrack.id;
     newRemove.textContent = "-";
 
-    //ADD
+    //New remove div button
     newRemove.addEventListener("click", function(){
         console.log("remove");
         let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
@@ -140,8 +141,7 @@ function createTrack(){
             text_fields[text_fields.length - 1].remove();
         }
 
-        Tone.getTransport().stop();
-        playState = false;
+        stop();
     });
 
 
@@ -151,38 +151,20 @@ function createTrack(){
     newAdd.textContent = "+";
 
     newAdd.addEventListener("click", function(){
-<<<<<<< HEAD
         console.log("add");
-        let text_fields = newTrack.querySelectorAll("#track-text-field");
 
-        let newD = createTextInput(tracks.length);
-        newTrack.appendChild(newD);
-        text_fields = newTrack.querySelectorAll("#track-text-field");
-
-=======
-        console.log("add")
         let newD = createTextInput(trackNumber);
         fieldsDiv.appendChild(newD);
->>>>>>> pr/1
 
-        Tone.getTransport().stop();
-        playState = false;
+        stop();
     });
 
-<<<<<<< HEAD
-    })
 
-    //Append everything
-    newTrack.appendChild(newRemove);
-    newTrack.appendChild(newAdd);
-
-=======
     // Add buttons to buttons container
     buttonsDiv.appendChild(newRemove);
     buttonsDiv.appendChild(newAdd);
     
     // Add text fields to fields container
->>>>>>> pr/1
     for (let i = 0; i < 4; i++){
         let newText = createTextInput(trackNumber);
         fieldsDiv.appendChild(newText);
@@ -222,54 +204,8 @@ function stop(){
     console.log("Stopped");
     Tone.getTransport().stop();
     playState = false;
-    playButton.textContent = "Play"
+    playButton.textContent = "Play";
 }
 
 
-//Initalizes current html
-function initializeTracks(){
-    tracks = document.querySelectorAll(".track");
-    console.log(tracks);
-    
-    for (let i = 0; i < tracks.length; i++){
-        let trackId = tracks[i].id;
-        let buttonsDiv = tracks[i].querySelector(".track-buttons");
-        let fieldsDiv = tracks[i].querySelector(".track-fields");
-        
-        let remove_div = buttonsDiv.querySelector("#remove-div");
-        let add_div = buttonsDiv.querySelector("#add-div");
-        
-        remove_div.addEventListener("click", function(){
-            console.log("remove");
-            let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
-            
-            if (text_fields.length > 1){
-                text_fields[text_fields.length - 1].remove();
-            }
-<<<<<<< HEAD
 
-            stop();
-=======
-            
-            Tone.getTransport().stop();
-            playState = false;
->>>>>>> pr/1
-        });
-
-        add_div.addEventListener("click", function(){
-            console.log("add");
-            let newD = createTextInput(i);
-<<<<<<< HEAD
-            tracks[i].appendChild(newD);
-            text_fields = tracks[i].querySelectorAll("#track-text-field");
-
-            stop();
-=======
-            fieldsDiv.appendChild(newD);
-
-            Tone.getTransport().stop();
-            playState = false;
->>>>>>> pr/1
-        });
-    }
-}
