@@ -19,9 +19,14 @@ let playButton
 
 
 window.onload = function () {
-    Tone.Transport.bpm.value = 150;
+    Tone.Transport.bpm.value = 120;
 
     inventory.addInstrument("samples/bass_boom.wav");
+    inventory.addInstrument("samples/kick.wav");
+    inventory.addInstrument("samples/snare.wav");
+    inventory.addInstrument("samples/hat.wav");
+    inventory.addInstrument("samples/cowbell.wav");
+    inventory.addInstrument("samples/synth.wav");
 
     createTrack();
 
@@ -57,7 +62,21 @@ window.onload = function () {
                 console.log(currentSelectedPattern);
             }
         })
-    }
+    };
+
+
+    //BPM Field
+    const bpmField = document.querySelector("#bpm-text-field");
+    bpmField.value = String(Tone.Transport.bpm.value);
+    bpmField.addEventListener("blur", function(){
+        if (Number(bpmField.value)){
+            Tone.Transport.bpm.value = Number(bpmField.value);
+            return;
+        }
+        else{
+            bpmField.value = Tone.Transport.bpm.value;
+        }
+    })
 
     //Add and Remove Track buttons connect events
     let addTrackButton = document.querySelector("#add-track-button");
@@ -106,7 +125,10 @@ function createTextInput(i){
     newField.maxLength = "4";
     newField.dataset.track = `track-${i}`;
     newField.value = "XXXX";
-    newField.addEventListener("click", stop);
+    newField.addEventListener("click", function(){
+        stop();
+        this.value = "";
+    });
     newField.addEventListener("blur", checkInputedText)
     return newField;
 }
@@ -200,7 +222,7 @@ function removeTrack(){
 
 function setActiveSequences(){
     for (let i = 0; i < activeSequences.length; i++){
-        // activeSequences[i].dispose();
+        activeSequences[i].dispose();
     };
 
     activeSequences = [];
@@ -226,6 +248,7 @@ function stop(){
         Tone.getTransport().stop();
         playState = false;
         playButton.textContent = "Play";
+        setActiveSequences()
     }
 }
 

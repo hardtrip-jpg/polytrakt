@@ -6,7 +6,7 @@ class Inventory {
     addInstrument(instrument, id){
         let new_instrument = new Tone.Sampler({
             urls: {
-                C1: instrument,
+                C2: instrument,
             },
             }).toDestination();
         this.list.push(new_instrument);
