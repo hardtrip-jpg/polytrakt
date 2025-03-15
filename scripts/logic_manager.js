@@ -59,8 +59,12 @@ window.onload = function () {
         })
     }
 
+    //Add and Remove Track buttons connect events
     let addTrackButton = document.querySelector("#add-track-button");
     addTrackButton.addEventListener("click", createTrack);
+
+    let removeTrackButton = document.querySelector("#remove-track-button");
+    removeTrackButton.addEventListener("click", removeTrack);
 
     document.addEventListener("click", () => {
         if (Tone.context.state != "running") {
@@ -69,16 +73,14 @@ window.onload = function () {
     });
 
 
+
+
 }
 
 ///
 ///
 ///
 
-// keyboard.down((key) => {
-//     console.log(key);
-//     inventory[0].triggerAttackRelease(key.frequency, "8n");
-// })
 
 
 //Handles when note is supposed to be played. Just connects instrument and note information provided by sequencer.
@@ -176,6 +178,14 @@ function createTrack(){
 
     main.appendChild(newTrack);
     tracks = document.querySelectorAll(".track");
+}
+
+function removeTrack(){
+    stop();
+    if (tracks.length > 0){
+        tracks[tracks.length - 1].remove();
+        tracks = document.querySelectorAll(".track");
+    }
 }
 
 function setActiveSequences(){
