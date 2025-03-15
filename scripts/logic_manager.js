@@ -110,11 +110,22 @@ function createTextInput(i){
 function createTrack(){
     let main = document.querySelector("#main-view");
     let newTrack = document.createElement("div");
+    let trackNumber = tracks.length + 1;
+    
+    newTrack.id = `track-${trackNumber}`;
+    newTrack.className = 'track';
+    
+    // Create track buttons container
+    let buttonsDiv = document.createElement("div");
+    buttonsDiv.className = "track-buttons";
+    
+    // Create track fields container
+    let fieldsDiv = document.createElement("div");
+    fieldsDiv.className = "track-fields";
+    
+    // Create buttons
     let newRemove = document.createElement("button");
     let newAdd = document.createElement("button");
-
-    newTrack.id = `track-${tracks.length + 1}`;
-    newTrack.className = 'track';
 
     newRemove.id = 'remove-div';
     newRemove.dataset.track = newTrack.id;
@@ -123,11 +134,10 @@ function createTrack(){
     //ADD
     newRemove.addEventListener("click", function(){
         console.log("remove");
-        let text_fields = newTrack.querySelectorAll("#track-text-field");
+        let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
 
         if (text_fields.length > 1){
-        text_fields[text_fields.length - 1].remove();
-        text_fields = newTrack.querySelectorAll("#track-text-field");
+            text_fields[text_fields.length - 1].remove();
         }
 
         Tone.getTransport().stop();
@@ -141,6 +151,7 @@ function createTrack(){
     newAdd.textContent = "+";
 
     newAdd.addEventListener("click", function(){
+<<<<<<< HEAD
         console.log("add");
         let text_fields = newTrack.querySelectorAll("#track-text-field");
 
@@ -148,23 +159,39 @@ function createTrack(){
         newTrack.appendChild(newD);
         text_fields = newTrack.querySelectorAll("#track-text-field");
 
+=======
+        console.log("add")
+        let newD = createTextInput(trackNumber);
+        fieldsDiv.appendChild(newD);
+>>>>>>> pr/1
 
         Tone.getTransport().stop();
         playState = false;
+    });
 
+<<<<<<< HEAD
     })
 
     //Append everything
     newTrack.appendChild(newRemove);
     newTrack.appendChild(newAdd);
 
+=======
+    // Add buttons to buttons container
+    buttonsDiv.appendChild(newRemove);
+    buttonsDiv.appendChild(newAdd);
+    
+    // Add text fields to fields container
+>>>>>>> pr/1
     for (let i = 0; i < 4; i++){
-        let newText = createTextInput(tracks.length + 1);
-        newTrack.appendChild(newText);
-
+        let newText = createTextInput(trackNumber);
+        fieldsDiv.appendChild(newText);
     }
 
-    console.log(newTrack)
+    // Add containers to track
+    newTrack.appendChild(buttonsDiv);
+    newTrack.appendChild(fieldsDiv);
+
     main.appendChild(newTrack);
     tracks = document.querySelectorAll(".track");
 }
@@ -202,31 +229,47 @@ function stop(){
 //Initalizes current html
 function initializeTracks(){
     tracks = document.querySelectorAll(".track");
-    console.log(tracks)
+    console.log(tracks);
+    
     for (let i = 0; i < tracks.length; i++){
-        let remove_div = tracks[i].querySelector("#remove-div");
-  
-        let add_div = tracks[i].querySelector("#add-div");
-        console.log(add_div);
-        let text_fields = tracks[i].querySelectorAll("#track-text-field");
-
+        let trackId = tracks[i].id;
+        let buttonsDiv = tracks[i].querySelector(".track-buttons");
+        let fieldsDiv = tracks[i].querySelector(".track-fields");
+        
+        let remove_div = buttonsDiv.querySelector("#remove-div");
+        let add_div = buttonsDiv.querySelector("#add-div");
+        
         remove_div.addEventListener("click", function(){
             console.log("remove");
+            let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
+            
             if (text_fields.length > 1){
-            text_fields[text_fields.length - 1].remove();
-            text_fields = tracks[i].querySelectorAll("#track-text-field");
+                text_fields[text_fields.length - 1].remove();
             }
+<<<<<<< HEAD
 
             stop();
+=======
+            
+            Tone.getTransport().stop();
+            playState = false;
+>>>>>>> pr/1
         });
 
         add_div.addEventListener("click", function(){
             console.log("add");
             let newD = createTextInput(i);
+<<<<<<< HEAD
             tracks[i].appendChild(newD);
             text_fields = tracks[i].querySelectorAll("#track-text-field");
 
             stop();
+=======
+            fieldsDiv.appendChild(newD);
+
+            Tone.getTransport().stop();
+            playState = false;
+>>>>>>> pr/1
         });
     }
 }

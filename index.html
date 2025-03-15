@@ -10,6 +10,8 @@
     <script src="scripts/track.js"></script>
     <script src="scripts/logic_manager.js"></script>
     <script src="scripts/ui_manager.js"></script>
+
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
@@ -19,35 +21,59 @@
         </h1>
     </header>
 
+    <main>
+        <div class="sequencer-view">
+            <div class="top-bar">
+                <div id="playhead-controls">
+                    <button id="play-button">Play</button>
+                </div>
+                <br>
+                <h3>Patterns</h3>
+                <div id="pattern-holders">
+                    <button id="pattern-button" data-pattern="0">0</button>
+                    <button id="pattern-button" data-pattern="1">1</button>
+                    <button id="pattern-button" data-pattern="2">2</button>
+                    <button id="remove-pattern-button">-</button>
+                    <button id="add-pattern-button">+</button>
+                </div>
+            </div>
+            <!-- <br> -->
+            <div id="main-view">
+                <div class="section-header">
+                    <h3>Pattern</h3>
+                    <button id="add-track-button">+</button>
+                </div>
+                <div id="track-1" class="track">
+                    <div class="track-buttons">
+                        <button id="remove-div" data-track="track-1">-</button>
+                        <button id="add-div" data-track="track-1">+</button>
+                    </div>
+                    <div class="track-fields">
+                        <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+                        <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+                        <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+                        <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+                        <input id="track-text-field" type="text" minlength="4" maxlength="4" data-track="track-1">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="top-bar">
-        <div id="playhead-controls">
-            <button id="play-button">Play</button>
-        </div>
-        <br>
-        Patterns
-        <div id="pattern-holders">
-            <button id="pattern-button" data-pattern="0">0</button>
-            <button id="pattern-button" data-pattern="1">1</button>
-            <button id="pattern-button" data-pattern="2">2</button>
-            <button id="remove-pattern-button">-</button>
-            <button id="add-pattern-button">+</button>
-        </div>
-    </div>
-    <br>
-    Tracks
-    <div id="main-view">
-    </div>
-    <button id="add-track-button">+</button>
+        <div class="side-bar">
+            <div id="instrument-section">
+                <h3>Instruments</h3>
+                <div id="instrument-list">
+                    <p>Boom - 00</p>
+                </div>
+            </div>
+            <div id="browser-section">
+                <h3>Browser</h3>
+                <div id="browser">
 
-    <div class="side-bar">
-        <div id="instrument-list">
-            <p>Boom - 00</p>
+                </div>
+            </div>
         </div>
-        <div id="browser">
-
-        </div>
-    </div>
+    </main>
 
 </body>
 
