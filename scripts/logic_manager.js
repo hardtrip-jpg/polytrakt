@@ -12,12 +12,13 @@ const keyboard = new AudioKeys({
 //Current Active Stuff
 let inventory = new Inventory;
 let activeSequences = [];
-let currentSelectedPattern = 0;
+let currentSelectedPattern = -1;
 
 let tracks = [];
 let playButton;
 
 let patterns = [];
+
 
 
 window.onload = function () {
@@ -31,6 +32,7 @@ window.onload = function () {
     inventory.addInstrument("samples/synth.wav");
 
     createPattern();
+    createTrack();
 
     //Play Button Logic
     playButton = document.getElementById("play-button");
@@ -55,16 +57,12 @@ window.onload = function () {
         }
     });
 
-    //Pattern Button Logic
-    const currentPatternButtons = document.querySelectorAll("#pattern-button");
-    for (let i = 0; i < currentPatternButtons.length; i++) {
-        currentPatternButtons[i].addEventListener("click", function () {
-            if (currentSelectedPattern != currentPatternButtons[i].dataset.pattern) {
-                currentSelectedPattern = currentPatternButtons[i].dataset.pattern;
-                console.log(currentSelectedPattern);
-            }
-        })
-    };
+    //Add and Remove Pattern buttons
+    const removePatternButton = document.querySelector("#remove-pattern-button");
+    const addPatternButton = document.querySelector("#add-pattern-button");
+
+    // removePatternButton.addEventListener()
+    addPatternButton.addEventListener("click", createPattern);
 
 
     //BPM Field
@@ -81,11 +79,18 @@ window.onload = function () {
     })
 
     //Add and Remove Track buttons connect events
-    let addTrackButton = document.querySelector("#add-track-button");
+    const addTrackButton = document.querySelector("#add-track-button");
     addTrackButton.addEventListener("click", createTrack);
 
-    let removeTrackButton = document.querySelector("#remove-track-button");
+    const removeTrackButton = document.querySelector("#remove-track-button");
     removeTrackButton.addEventListener("click", removeTrack);
+
+    // Save and Load buttons
+    const saveButton = document.getElementById("export-button");
+    saveButton.addEventListener("click", saveProject);
+
+    const loadButton = document.getElementById("import-button");
+    loadButton.addEventListener("click", loadProject);
 
     document.addEventListener("click", () => {
         if (Tone.context.state != "running") {
@@ -239,7 +244,7 @@ function setActiveSequences() {
 
     for (let i = 0; i < tracks.length; i++) {
         let currentTrackSequence = [];
-        let textFields = tracks[i].querySelectorAll("#track-text-field");
+        const textFields = tracks[i].querySelectorAll("#track-text-field");
         for (let x = 0; x < textFields.length; x++) {
             currentTrackSequence.push(textFields[x].value);
         }
@@ -259,7 +264,7 @@ function stop() {
         Tone.getTransport().stop();
         playState = false;
         playButton.textContent = "Play";
-        setActiveSequences()
+        setActiveSequences();
     }
 }
 
