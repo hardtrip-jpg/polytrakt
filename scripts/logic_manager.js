@@ -92,13 +92,6 @@ window.onload = function () {
     const loadButton = document.getElementById("import-button");
     loadButton.addEventListener("click", loadProject);
 
-    // Save and Load buttons
-    const saveButton = document.getElementById("export-button");
-    saveButton.addEventListener("click", saveProject);
-
-    const loadButton = document.getElementById("import-button");
-    loadButton.addEventListener("click", loadProject);
-
     document.addEventListener("click", () => {
         if (Tone.context.state != "running") {
             Tone.start();
@@ -136,7 +129,7 @@ function createTextInput(i) {
         this.value = "";
     });
     newField.addEventListener("blur", checkInputedText);
-    setActiveSequences();
+    // setActiveSequences();
     return newField;
 }
 
@@ -147,7 +140,7 @@ function checkInputedText() {
         return;
     }
 
-    setActiveSequences();
+    // setActiveSequences();
 }
 
 //Creates a new track
@@ -231,6 +224,9 @@ function removeTrack() {
 
 function setActiveSequences() {
     stop();
+    if (currentSelectedPattern == -1) {
+        return;
+    }
     patterns[currentSelectedPattern] = [];
 
     for (let i = 0; i < activeSequences.length; i++) {
@@ -253,6 +249,7 @@ function setActiveSequences() {
 
         patterns[currentSelectedPattern].push(currentTrackSequence);
     }
+    console.log(patterns);
 }
 
 function stop() {
