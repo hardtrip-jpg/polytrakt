@@ -84,11 +84,11 @@ window.onload = function () {
 
     const removeTrackButton = document.querySelector("#remove-track-button");
     removeTrackButton.addEventListener("click", removeTrack);
-    
+
     // Save and Load buttons
     const saveButton = document.getElementById("export-button");
     saveButton.addEventListener("click", saveProject);
-    
+
     const loadButton = document.getElementById("import-button");
     loadButton.addEventListener("click", loadProject);
 
