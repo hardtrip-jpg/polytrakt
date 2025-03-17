@@ -86,23 +86,24 @@ window.onload = function () {
 
     let removeTrackButton = document.querySelector("#remove-track-button");
     removeTrackButton.addEventListener("click", removeTrack);
+    
+    // Save and Load buttons
+    const saveButton = document.getElementById("export-button");
+    saveButton.addEventListener("click", saveProject);
+    
+    const loadButton = document.getElementById("import-button");
+    loadButton.addEventListener("click", loadProject);
 
     document.addEventListener("click", () => {
         if (Tone.context.state != "running") {
             Tone.start();
         }
     });
-
-
-
-
 }
 
 ///
 ///
 ///
-
-
 
 //Handles when note is supposed to be played. Just connects instrument and note information provided by sequencer.
 function playNote(time, note) {
@@ -116,8 +117,6 @@ function playNote(time, note) {
     let currentInstrument = inventory.matchInstrument(instrument);
     currentInstrument.triggerAttack(pitch, time);
 }
-
-
 
 function createTextInput(i) {
     let newField = document.createElement("input");
@@ -184,7 +183,6 @@ function createTrack() {
         setActiveSequences();
     });
 
-
     //New add div button
     newAdd.id = 'add-div';
     newAdd.dataset.track = newTrack.id;
@@ -198,7 +196,6 @@ function createTrack() {
 
         setActiveSequences();
     });
-
 
     // Add buttons to buttons container
     buttonsDiv.appendChild(newRemove);
