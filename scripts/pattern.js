@@ -4,3 +4,6 @@ class Pattern {
     }
 }
 
+function createPattern() {
+    createTrack();
+}

@@ -7,7 +7,6 @@
     <script src="scripts/audiokeys.min.js"></script>
     <script src="scripts/pattern.js"></script>
     <script src="scripts/inventory.js"></script>
-    <script src="scripts/track.js"></script>
     <script src="scripts/logic_manager.js"></script>
 
     <link rel="stylesheet" href="styles/style.css">
@@ -18,6 +17,10 @@
         <h1>
             <marquee>POLYTRAKT</marquee>
         </h1>
+        <div>
+            <button id="export-button">Save</button>
+            <button id="import-button">Load</button>
+        </div>
     </header>
 
     <main>
@@ -28,10 +31,10 @@
                 </div>
                 <br>
                 <h3>Patterns</h3>
-                <div id="pattern-holders">
-                    <button id="pattern-button" data-pattern="0">0</button>
-                    <button id="pattern-button" data-pattern="1">1</button>
-                    <button id="pattern-button" data-pattern="2">2</button>
+                <div id="pattern-section">
+                    <div id="pattern-holders">
+                        <button id="pattern-button" data-pattern="0">0</button>
+                    </div>
                     <button id="remove-pattern-button">-</button>
                     <button id="add-pattern-button">+</button>
                 </div>

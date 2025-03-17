@@ -15,7 +15,9 @@ let activeSequences = [];
 let currentSelectedPattern = 0;
 
 let tracks = [];
-let playButton
+let playButton;
+
+let patterns = [];
 
 
 window.onload = function () {
@@ -28,14 +30,14 @@ window.onload = function () {
     inventory.addInstrument("samples/cowbell.wav");
     inventory.addInstrument("samples/synth.wav");
 
-    createTrack();
+    createPattern();
 
     //Play Button Logic
     playButton = document.getElementById("play-button");
 
-    playButton.addEventListener("click", function(){
+    playButton.addEventListener("click", function () {
         if (playState) {
-            for (let i = 0; i < activeSequences.length; i++){
+            for (let i = 0; i < activeSequences.length; i++) {
                 activeSequences[i].stop();
             }
             this.textContent = "Play"
@@ -44,7 +46,7 @@ window.onload = function () {
         }
         else {
             setActiveSequences();
-            for (let i = 0; i < activeSequences.length; i++){
+            for (let i = 0; i < activeSequences.length; i++) {
                 activeSequences[i].start();
             }
             this.textContent = "Stop"
@@ -55,9 +57,9 @@ window.onload = function () {
 
     //Pattern Button Logic
     const currentPatternButtons = document.querySelectorAll("#pattern-button");
-    for (let i = 0; i < currentPatternButtons.length; i++){
-        currentPatternButtons[i].addEventListener("click", function(){
-            if(currentSelectedPattern != currentPatternButtons[i].dataset.pattern){
+    for (let i = 0; i < currentPatternButtons.length; i++) {
+        currentPatternButtons[i].addEventListener("click", function () {
+            if (currentSelectedPattern != currentPatternButtons[i].dataset.pattern) {
                 currentSelectedPattern = currentPatternButtons[i].dataset.pattern;
                 console.log(currentSelectedPattern);
             }
@@ -68,12 +70,12 @@ window.onload = function () {
     //BPM Field
     const bpmField = document.querySelector("#bpm-text-field");
     bpmField.value = String(Tone.Transport.bpm.value);
-    bpmField.addEventListener("blur", function(){
-        if (Number(bpmField.value)){
+    bpmField.addEventListener("blur", function () {
+        if (Number(bpmField.value)) {
             Tone.Transport.bpm.value = Number(bpmField.value);
             return;
         }
-        else{
+        else {
             bpmField.value = Tone.Transport.bpm.value;
         }
     })
@@ -104,7 +106,7 @@ window.onload = function () {
 
 //Handles when note is supposed to be played. Just connects instrument and note information provided by sequencer.
 function playNote(time, note) {
-    if (note == "XXXX"){
+    if (note == "XXXX") {
         return;
     }
 
@@ -117,7 +119,7 @@ function playNote(time, note) {
 
 
 
-function createTextInput(i){
+function createTextInput(i) {
     let newField = document.createElement("input");
     newField.id = "track-text-field";
     newField.type = "text";
@@ -125,39 +127,42 @@ function createTextInput(i){
     newField.maxLength = "4";
     newField.dataset.track = `track-${i}`;
     newField.value = "XXXX";
-    newField.addEventListener("click", function(){
+    newField.addEventListener("click", function () {
         stop();
         this.value = "";
     });
-    newField.addEventListener("blur", checkInputedText)
+    newField.addEventListener("blur", checkInputedText);
+    setActiveSequences();
     return newField;
 }
 
-function checkInputedText(){
-    if (this.value.length != 4){
+function checkInputedText() {
+    if (this.value.length != 4) {
         this.value = "XXXX";
-        console.log ("Please enter 4 digit code");
+        console.log("Please enter 4 digit code");
         return;
     }
+
+    setActiveSequences();
 }
 
 //Creates a new track
-function createTrack(){
+function createTrack() {
     let main = document.querySelector("#main-view");
     let newTrack = document.createElement("div");
     let trackNumber = tracks.length + 1;
-    
+
     newTrack.id = `track-${trackNumber}`;
     newTrack.className = 'track';
-    
+
     // Create track buttons container
     let buttonsDiv = document.createElement("div");
     buttonsDiv.className = "track-buttons";
-    
+
     // Create track fields container
     let fieldsDiv = document.createElement("div");
     fieldsDiv.className = "track-fields";
-    
+
     // Create buttons
     let newRemove = document.createElement("button");
     let newAdd = document.createElement("button");
@@ -167,15 +172,16 @@ function createTrack(){
     newRemove.textContent = "-";
 
     //New remove div button
-    newRemove.addEventListener("click", function(){
+    newRemove.addEventListener("click", function () {
         console.log("remove");
         let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
 
-        if (text_fields.length > 1){
+        if (text_fields.length > 1) {
             text_fields[text_fields.length - 1].remove();
+
         }
 
-        stop();
+        setActiveSequences();
     });
 
 
@@ -184,22 +190,22 @@ function createTrack(){
     newAdd.dataset.track = newTrack.id;
     newAdd.textContent = "+";
 
-    newAdd.addEventListener("click", function(){
+    newAdd.addEventListener("click", function () {
         console.log("add");
 
         let newD = createTextInput(trackNumber);
         fieldsDiv.appendChild(newD);
 
-        stop();
+        setActiveSequences();
     });
 
 
     // Add buttons to buttons container
     buttonsDiv.appendChild(newRemove);
     buttonsDiv.appendChild(newAdd);
-    
+
     // Add text fields to fields container
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 4; i++) {
         let newText = createTextInput(trackNumber);
         fieldsDiv.appendChild(newText);
     }
@@ -212,38 +218,43 @@ function createTrack(){
     tracks = document.querySelectorAll(".track");
 }
 
-function removeTrack(){
+function removeTrack() {
     stop();
-    if (tracks.length > 0){
+    if (tracks.length > 0) {
         tracks[tracks.length - 1].remove();
         tracks = document.querySelectorAll(".track");
-    }
+    };
+    setActiveSequences();
 }
 
-function setActiveSequences(){
-    for (let i = 0; i < activeSequences.length; i++){
+function setActiveSequences() {
+    stop();
+    patterns[currentSelectedPattern] = [];
+
+    for (let i = 0; i < activeSequences.length; i++) {
         activeSequences[i].dispose();
     };
 
     activeSequences = [];
 
-    for (let i = 0; i < tracks.length; i++){
+    for (let i = 0; i < tracks.length; i++) {
         let currentTrackSequence = [];
         let textFields = tracks[i].querySelectorAll("#track-text-field");
-        for (let x = 0; x < textFields.length; x++){
+        for (let x = 0; x < textFields.length; x++) {
             currentTrackSequence.push(textFields[x].value);
         }
-        let newSequence = new Tone.Sequence(function(time, note){
+        let newSequence = new Tone.Sequence(function (time, note) {
             playNote(time, note);
-        //straight quater notes
+            //straight quater notes
         }, currentTrackSequence, `${currentTrackSequence.length}n`);
         activeSequences.push(newSequence);
+
+        patterns[currentSelectedPattern].push(currentTrackSequence);
     }
-    console.log(activeSequences);
 }
 
-function stop(){
-    if (playState){
+function stop() {
+    if (playState) {
         console.log("Stopped");
         Tone.getTransport().stop();
         playState = false;
@@ -252,5 +263,7 @@ function stop(){
     }
 }
 
-
-
+function checkValues() {
+    console.log(patterns);
+    console.log(patterns[currentSelectedPattern]);
+}
