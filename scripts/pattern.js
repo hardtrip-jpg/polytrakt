@@ -14,24 +14,11 @@ function createPattern() {
     for (let i = 0; i < tracks.length; i++) {
         patterns[currentSelectedPattern].push(["XXXX", "XXXX", "XXXX", "XXXX"]);
     }
-
     console.log(patterns);
 
-    //Add pattern button
-    const patternHolder = document.querySelector("#patterns-holder");
-    let newPattern = document.createElement("button");
-    newPattern.id = "pattern-button";
-    newPattern.dataset.pattern = `${currentSelectedPattern}`;
-    newPattern.textContent = `${currentSelectedPattern}`
-    newPattern.addEventListener("click", function () {
-        setActiveSequences();
-        currentSelectedPattern = this.dataset.pattern;
-        loadPattern();
-    });
+    createPatternButton(currentSelectedPattern);
 
     loadPattern();
-
-    patternHolder.appendChild(newPattern);
 }
 
 function loadPattern() {
@@ -85,4 +72,19 @@ function fixPatternTrackSize(id) {
             patterns[id].pop();
         }
     }
+}
+
+function createPatternButton(id) {
+    //Add pattern button
+    const patternHolder = document.querySelector("#patterns-holder");
+    let newPattern = document.createElement("button");
+    newPattern.id = "pattern-button";
+    newPattern.dataset.pattern = `${id}`;
+    newPattern.textContent = `${id}`
+    newPattern.addEventListener("click", function () {
+        setActiveSequences();
+        currentSelectedPattern = this.dataset.pattern;
+        loadPattern();
+    });
+    patternHolder.appendChild(newPattern);
 }

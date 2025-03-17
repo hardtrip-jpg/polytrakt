@@ -14,6 +14,8 @@ function saveProject() {
         patterns: patterns
     };
 
+    console.log(projectData);
+
     // Convert to JSON string
     const jsonData = JSON.stringify(projectData, null, 2);
 
@@ -92,6 +94,13 @@ function loadProjectData(data) {
 
 //Rebuild the UI patterns based on loaded data
 function rebuildPatterns() {
+    const matchView = document.querySelector("#main-view");
+    const existingPatterns = document.querySelectorAll("#pattern-button")
+    existingPatterns.forEach(button => button.remove());
+
+    for (let i = 0; i < patterns.length; i++) {
+        createPatternButton(i);
+    }
 
 }
 
@@ -132,6 +141,7 @@ function rebuildTracksFromPatterns() {
         });
     });
 
+    loadPattern();
     // Update sequences
     setActiveSequences();
 }
