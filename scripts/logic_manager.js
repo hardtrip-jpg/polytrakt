@@ -62,6 +62,7 @@ window.onload = function () {
     const addPatternButton = document.querySelector("#add-pattern-button");
 
     // removePatternButton.addEventListener()
+    removePatternButton.addEventListener("click", removePattern);
     addPatternButton.addEventListener("click", createPattern);
 
 

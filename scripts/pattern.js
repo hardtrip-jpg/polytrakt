@@ -21,6 +21,19 @@ function createPattern() {
     loadPattern();
 }
 
+function removePattern(){
+    if (patterns.length <= 1){
+        return;
+    };
+    
+
+    patterns.pop();
+    let patternButtons = document.querySelectorAll("#pattern-button");
+    patternButtons[patternButtons.length - 1].remove();
+    currentSelectedPattern -= 1;
+    loadPattern();
+}
+
 function loadPattern() {
     fixPatternTrackSize(currentSelectedPattern);
 
