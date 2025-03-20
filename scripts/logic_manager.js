@@ -19,6 +19,7 @@ let playButton;
 
 let patterns = [];
 
+let patternSequence = [];
 
 
 window.onload = function () {

@@ -11,7 +11,8 @@ function saveProject() {
     const projectData = {
         bpm: Tone.Transport.bpm.value,
         currentPattern: currentSelectedPattern,
-        patterns: patterns
+        patterns: patterns,
+        patternSequence: patternSequence
     };
 
     console.log(projectData);
@@ -87,9 +88,17 @@ function loadProjectData(data) {
     // Set current pattern
     currentSelectedPattern = data.currentPattern || 0;
 
+    // Set current pattern sequence
+    patternSequence = data.patternSequence || [];
+
     // Update UI to reflect loaded data
+    rebuildSequence();
     rebuildPatterns();
     rebuildTracksFromPatterns();
+}
+
+function rebuildSequence(){
+
 }
 
 //Rebuild the UI patterns based on loaded data
