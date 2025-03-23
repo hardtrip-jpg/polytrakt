@@ -43,7 +43,7 @@ window.onload = function () {
             for (let i = 0; i < activeSequences.length; i++) {
                 activeSequences[i].stop();
             }
-            this.textContent = "Play"
+            this.innerHTML = '<i class="fas fa-play"></i> Play';
             Tone.getTransport().stop();
             playState = false;
         }
@@ -52,7 +52,7 @@ window.onload = function () {
             for (let i = 0; i < activeSequences.length; i++) {
                 activeSequences[i].start();
             }
-            this.textContent = "Stop"
+            this.innerHTML = '<i class="fas fa-stop"></i> Stop';
             playState = true;
             Tone.getTransport().start();
         }
@@ -259,7 +259,7 @@ function stop() {
         console.log("Stopped");
         Tone.getTransport().stop();
         playState = false;
-        playButton.textContent = "Play";
+        playButton.innerHTML = '<i class="fas fa - play"></i> Play';
         setActiveSequences();
     }
 }

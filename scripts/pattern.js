@@ -19,6 +19,7 @@ function createPattern() {
     createPatternButton(currentSelectedPattern);
 
     loadPattern();
+    updateSelectedPatternButton();
 }
 
 function removePattern(){
@@ -26,12 +27,12 @@ function removePattern(){
         return;
     };
     
-
     patterns.pop();
     let patternButtons = document.querySelectorAll("#pattern-button");
     patternButtons[patternButtons.length - 1].remove();
     currentSelectedPattern -= 1;
     loadPattern();
+    updateSelectedPatternButton();
 }
 
 function loadPattern() {
@@ -70,6 +71,20 @@ function loadPattern() {
 
     setActiveSequences();
     console.log(`Set to Pattern ${currentSelectedPattern}`);
+    updateSelectedPatternButton();
+}
+
+function updateSelectedPatternButton() {
+    // Clear selected class from all pattern buttons
+    let patternButtons = document.querySelectorAll("#pattern-button");
+    patternButtons.forEach(button => {
+        button.classList.remove("selected");
+    });
+    
+    // Add selected class to current pattern button
+    if (currentSelectedPattern >= 0 && currentSelectedPattern < patternButtons.length) {
+        patternButtons[currentSelectedPattern].classList.add("selected");
+    }
 }
 
 function fixPatternTrackSize(id) {
@@ -96,7 +111,7 @@ function createPatternButton(id) {
     newPattern.textContent = `${id}`
     newPattern.addEventListener("click", function () {
         setActiveSequences();
-        currentSelectedPattern = this.dataset.pattern;
+        currentSelectedPattern = parseInt(this.dataset.pattern);
         loadPattern();
     });
     patternHolder.appendChild(newPattern);
