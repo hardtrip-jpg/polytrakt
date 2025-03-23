@@ -58,7 +58,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
     transition: background-color 0.3s ease;
 }
 
@@ -107,56 +107,57 @@ button {
     color: var(--text-color);
     margin-right: 8px;
     transition: all 0.2s ease;
-    border-radius: 5px;
+    border-radius: 0;
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 button:hover {
     background: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: none;
+    box-shadow: none;
+    color: white;
 }
 
 button:active {
     background: var(--primary-color);
     color: white;
-    transform: translateY(0);
 }
 
 .fun-button {
-    background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+    background: var(--primary-color);
     color: white;
 }
 
 .fun-button:hover {
-    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+    background: var(--primary-dark);
 }
 
 .circle-button {
     width: 36px;
     height: 36px;
-    border-radius: 50%;
+    border-radius: 0;
     padding: 0;
 }
 
 #play-button {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     color: white;
     margin: auto;
     display: block;
     padding: 10px 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: none;
+    transition: all 0.2s ease;
     font-family: evermore;
     font-size: 10px;
 }
 
 #play-button:hover {
-    background: linear-gradient(45deg, var(--primary-dark), var(--secondary-color));
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background: var(--primary-dark);
+    transform: none;
+    box-shadow: none;
 }
 
 #pattern-section {
@@ -178,10 +179,10 @@ button:active {
     margin: 15px;
     background-color: var(--card-bg);
     border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
     padding: 20px;
     height: fit-content;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 #bpm-text-field {
@@ -201,12 +202,12 @@ button:active {
     border-left: 4px solid var(--primary-color);
     padding: 12px;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .track:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px var(--primary-color);
+    transform: none;
 }
 
 .track-buttons {
@@ -222,6 +223,10 @@ button:active {
 
 .track button {
     margin-right: 8px;
+}
+
+input {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .track input {
@@ -263,26 +268,28 @@ button:active {
     padding: 8px 10px;
     cursor: pointer;
     transition: all 0.2s ease;
-    border-radius: 3px;
+    border-radius: 0;
 }
 
 #instrument-list p:hover {
-    background-color: var(--primary-light);
+    background-color: var(--primary-color);
     color: white;
-    transform: translateX(5px);
+    transform: none;
+    border-left: 3px solid var(--primary-dark);
+    padding-left: 7px;
 }
 
 #add-pattern-button, #add-track-button {
-    background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+    background: var(--primary-color);
     color: white;
 }
 
 #remove-pattern-button, #remove-track-button {
-    background: linear-gradient(45deg, #e0e0e0, #f2f2f2);
+    background: var(--border-color);
 }
 
 #add-pattern-button:hover, #add-track-button:hover {
-    background: linear-gradient(45deg, var(--primary-dark), var(--primary-color));
+    background: var(--primary-dark);
 }
 
 #remove-pattern-button:hover, #remove-track-button:hover {
@@ -297,13 +304,14 @@ button:active {
     background: var(--border-color);
     color: var(--text-color);
     font-weight: bold;
-    border-radius: 50%;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
 #pattern-button.selected {
     background: var(--primary-color);
     color: white;
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(128, 179, 255, 0.5);
+    transform: none;
+    box-shadow: none;
+    border: 2px solid var(--primary-dark);
 }
