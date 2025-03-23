@@ -12,12 +12,12 @@
 
 @font-face {
     font-family: 'evermore';
-    src: url(/assets/evermore/Evermore.ttf);
+    src: url(../assets/evermore/Evermore.ttf);
 }
 
 @font-face {
     font-family: technotot;
-    src: url(/assets/technotot/Technotot.otf);
+    src: url(../assets/technotot/Technotot.otf);
 }
 
 body {
