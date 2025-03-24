@@ -127,7 +127,7 @@ h3 {
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.5px;
-    color: #333;
+    color: var(--text-color);
     font-family: technotot;
 }
 
@@ -162,6 +162,7 @@ button {
     position: relative;
     overflow: hidden;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    border-radius: 0;
 }
 
 button:hover {
@@ -209,6 +210,7 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.15s ease;
+    border-radius: 0;
 }
 
 .count-button:hover {
@@ -257,7 +259,7 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 #patterns-holder {
     display: flex;
     margin-left: 5px;
-    border-left: #80b3ff 2px solid;
+    border-left: var(--primary-color) 2px solid;
     padding-left: 10px;
 }
 
@@ -275,7 +277,7 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 
 #bpm-text-field {
     border: none;
-    border-bottom: 2px solid #80b3ff;
+    border-bottom: 2px solid var(--primary-color);
     font-size: 16px;
     padding: 5px;
     margin: 0 15px;
@@ -331,7 +333,7 @@ input {
 }
 
 .track input:focus {
-    border-bottom: 2px solid #80b3ff;
+    border-bottom: 2px solid var(--primary-color);
     outline: none;
 }
 
@@ -403,6 +405,7 @@ input {
     font-weight: bold;
     transition: all 0.3s ease;
     border-bottom: 2px solid #ccc;
+    border-radius: 0;
 }
 
 #pattern-button:hover {
@@ -426,34 +429,16 @@ input {
     box-shadow: 0 2px 6px rgba(128, 179, 255, 0.3);
 }
 
-@keyframes buttonPress {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(2px); }
-    100% { transform: translateY(0); }
-}
-
-.theme-selector-wrapper {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-}
-
+/* Theme selector styling */
 .theme-label {
-    margin-right: 5px;
     color: var(--primary-color);
-    cursor: pointer;
 }
 
 .theme-selector {
     background-color: var(--bg-color);
     border: 1px solid var(--border-color);
     border-radius: 0;
-    padding: 5px 8px;
-    font-size: 12px;
     color: var(--text-color);
-    transition: all 0.2s ease;
-    cursor: pointer;
-    font-family: inherit;
 }
 
 .theme-selector:hover {
@@ -464,4 +449,10 @@ input {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(128, 179, 255, 0.2);
+}
+
+@keyframes buttonPress {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(2px); }
+    100% { transform: translateY(0); }
 }

@@ -1,0 +1,76 @@
+:root {
+    --primary-color: #4d7fe6;
+    --primary-dark: #3a60b0;
+    --primary-light: #6a9aff;
+    --secondary-color: #bb9af7;
+    --accent-color: #50cc77;
+    --bg-color: #1a1b26;
+    --card-bg: #24283b;
+    --text-color: #cbd3f8;
+    --border-color: #414868;
+}
+
+h3 {
+    color: var(--text-color);
+}
+
+.fun-button:hover {
+    border-bottom: 4px solid #2c4d8c;
+}
+
+#play-button:hover {
+    box-shadow: 0 6px 0 #2c4d8c;
+}
+
+#play-button:active {
+    box-shadow: 0 1px 0 #2c4d8c;
+}
+
+#patterns-holder {
+    border-left: var(--primary-color) 2px solid;
+}
+
+#bpm-text-field {
+    border-bottom: 2px solid var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+}
+
+.track {
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.track:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+    border-bottom: 1px solid var(--primary-light);
+}
+
+.track input {
+    border: 1px solid #414868;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+}
+
+
+#add-pattern-button:hover, #add-track-button:hover {
+    background: var(--primary-dark);
+    border-bottom: 3px solid #2c4d8c;
+}
+
+#add-pattern-button:active, #add-track-button:active {
+    border-bottom: 1px solid #2c4d8c;
+}
+
+#remove-pattern-button:hover, #remove-track-button:hover {
+    background: #505b82;
+}
+
+#pattern-button {
+    background: var(--border-color);
+    color: var(--text-color);
+    border-bottom: 2px solid #333b59;
+}
