@@ -10,16 +10,6 @@
     --border-color: #e0e0e0;
 }
 
-@font-face {
-    font-family: 'evermore';
-    src: url(../assets/evermore/Evermore.ttf);
-}
-
-@font-face {
-    font-family: technotot;
-    src: url(../assets/technotot/Technotot.otf);
-}
-
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 0;
@@ -116,10 +106,6 @@ header {
 .header-controls {
     display: flex;
     align-items: center;
-}
-
-header button:hover {
-    background: rgba(255, 255, 255, 0.2);
 }
 
 h3 {
@@ -228,8 +214,6 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 #play-button {
     background: var(--primary-color);
     color: white;
-    margin: auto;
-    display: block;
     padding: 10px 30px;
     box-shadow: 0 4px 0 var(--primary-dark);
     transition: all 0.15s ease;

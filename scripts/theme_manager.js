@@ -9,51 +9,59 @@ class ThemeManager {
             'dark': {
                 name: 'Dark',
                 path: 'styles/themes/dark.css'
+            },
+            'aqua': {
+                name: 'Aqua',
+                path: 'styles/themes/macos.css'
             }
         };
         
-        this.initThemeLink();
+        this.themeLinks = {};
         
-        // event listeners when DOM is loaded
+        this.initThemeSystem();
+        
         document.addEventListener('DOMContentLoaded', () => {
             this.setupEventListeners();
         });
     }
     
-    initThemeLink() {
-        // remove any existing theme stylesheet
-        const existingThemeLink = document.getElementById('theme-stylesheet');
-        if (existingThemeLink) {
-            existingThemeLink.remove();
-        }
-    
-        this.themeLink = document.createElement('link');
-        this.themeLink.rel = 'stylesheet';
-        this.themeLink.id = 'theme-stylesheet';
-        
-        document.head.appendChild(this.themeLink);
+    initThemeSystem() {
+        Object.keys(this.themes).forEach(themeName => {
+            const linkEl = document.createElement('link');
+            linkEl.rel = 'stylesheet';
+            linkEl.id = `theme-${themeName}-stylesheet`;
+            linkEl.href = this.themes[themeName].path;
+            linkEl.disabled = true;
+            document.head.appendChild(linkEl);
+            this.themeLinks[themeName] = linkEl;
+        });
 
         this.loadSavedTheme();
     }
     
     setupEventListeners() {
         const themeSelector = document.getElementById('theme-selector');
-        themeSelector.value = this.currentTheme;
-        
-        themeSelector.addEventListener('change', (e) => {
-            this.switchTheme(e.target.value);
-        });
+        if (themeSelector) {
+            themeSelector.value = this.currentTheme;
+            
+            themeSelector.addEventListener('change', (e) => {
+                this.switchTheme(e.target.value);
+            });
+        }
     }
     
-    switchTheme(themeName) {
-        if (this.themeLink.parentNode) {
-            this.themeLink.remove();
-        }
+    switchTheme(themeName) {        
+        // disable all themes first
+        Object.keys(this.themeLinks).forEach(name => {
+            this.themeLinks[name].disabled = true;
+        });
         
-        // add timestamp to prevent caching
+        // enable only the selected theme
+        this.themeLinks[themeName].disabled = false;
+        
+        // add timestamp to force reload (prevent caching issues)
         const timestamp = new Date().getTime();
-        this.themeLink.href = `${this.themes[themeName].path}?t=${timestamp}`;
-        document.head.appendChild(this.themeLink);
+        this.themeLinks[themeName].href = `${this.themes[themeName].path}?t=${timestamp}`;
         
         this.currentTheme = themeName;
         
@@ -85,5 +93,4 @@ class ThemeManager {
 }
 
 const themeManager = new ThemeManager();
-
 window.themeManager = themeManager;

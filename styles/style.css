@@ -118,10 +118,6 @@ header {
     align-items: center;
 }
 
-header button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
 h3 {
     margin: 0;
     font-size: 18px;
@@ -150,102 +146,37 @@ h3 {
     align-items: center;
 }
 
-button {
-    background: var(--border-color);
-    border: none;
-    padding: 8px 16px;
-    font-size: 13px;
-    color: var(--text-color);
-    margin-right: 8px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-button:hover {
-    background: var(--primary-light);
-    transform: none;
-    box-shadow: none;
-    color: white;
-}
-
-button:active {
-    background: var(--primary-color);
-    color: white;
-}
-
 button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button):active {
     animation: buttonPress 0.2s ease;
 }
 
-.fun-button {
+/* .fun-button {
     background: var(--primary-color);
     color: white;
     border-bottom: 3px solid var(--primary-dark);
     border-right: 1px solid var(--primary-dark);
     transform: translateY(0);
     transition: all 0.2s ease;
-}
-
-.fun-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    border-bottom: 4px solid #5a87cc;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.fun-button:active {
-    transform: translateY(1px);
-    border-bottom: 1px solid var(--primary-dark);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .count-button {
     width: 36px;
     height: 36px;
     padding: 0;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.15s ease;
 }
 
 .count-button:hover {
     transform: translateY(-1px);
-    border-bottom: 3px solid rgba(0, 0, 0, 0.15);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.08);
 }
 
 .count-button:active {
     transform: translateY(1px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 #play-button {
-    background: var(--primary-color);
-    color: white;
     margin: auto;
     display: block;
-    padding: 10px 30px;
-    box-shadow: 0 4px 0 var(--primary-dark);
-    transition: all 0.15s ease;
-    font-family: evermore;
-    font-size: 10px;
-    transform: translateY(0);
-    border-bottom: none;
-}
-
-#play-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #5a87cc;
-}
-
-#play-button:active {
-    transform: translateY(3px);
-    box-shadow: 0 1px 0 #5a87cc;
 }
 
 #pattern-section {
@@ -336,6 +267,8 @@ input {
 }
 
 .side-bar {
+    display: flex;
+    flex-direction: column;
     background: var(--card-bg);
     border-left: 2px solid var(--border-color);
     padding: 20px;
@@ -362,36 +295,20 @@ input {
     transition: all 0.2s ease;
 }
 
-#instrument-list p:hover {
-    background-color: var(--primary-color);
-    color: white;
-    transform: none;
-    border-left: 3px solid var(--primary-dark);
-    padding-left: 7px;
-}
 
 #add-pattern-button, #add-track-button {
     background: var(--primary-color);
     color: white;
-    border-bottom: 2px solid var(--primary-dark);
 }
 
 #remove-pattern-button, #remove-track-button {
     background: var(--border-color);
 }
 
-#add-pattern-button:hover, #add-track-button:hover {
-    background: var(--primary-dark);
-    border-bottom: 3px solid #5a87cc;
-}
-
 #add-pattern-button:active, #add-track-button:active {
     border-bottom: 1px solid #5a87cc;
 }
 
-#remove-pattern-button:hover, #remove-track-button:hover {
-    background: #d0d0d0;
-}
 
 #pattern-button {
     width: 36px;
@@ -402,7 +319,6 @@ input {
     color: var(--text-color);
     font-weight: bold;
     transition: all 0.3s ease;
-    border-bottom: 2px solid #ccc;
 }
 
 #pattern-button:hover {
@@ -422,7 +338,6 @@ input {
     transform: none;
     box-shadow: none;
     border: none;
-    border-bottom: 3px solid var(--primary-dark);
     box-shadow: 0 2px 6px rgba(128, 179, 255, 0.3);
 }
 
@@ -435,7 +350,10 @@ input {
 .theme-selector-wrapper {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    align-self: center;
+    justify-self: flex-end;
+    margin-top: auto;
+    margin-bottom: 30px;
 }
 
 .theme-label {

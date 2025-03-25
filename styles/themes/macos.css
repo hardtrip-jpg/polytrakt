@@ -1,0 +1,293 @@
+:root {
+    --primary-color: #0092d1;
+    --primary-dark: #0076a9;
+    --primary-light: #3aaddb;
+    --secondary-color: #84c2e8;
+    --accent-color: #76bd43;
+    --bg-color: #e2e2e2;
+    --card-bg: #f5f5f7;
+    --text-color: #333;
+    --border-color: #c0c0c0;
+    --plastic: repeating-linear-gradient(#F0F0F0, #F0F0F0 4px, #FFFFFF 4px, #FFFFFF 8px);
+    --aluminum: linear-gradient(to bottom, #d5d5d5 0%, #e8e8e8 50%, #d5d5d5 100%);
+    --button-shine: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent);
+    --aqua-background: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #8de3fc, transparent);
+    --aqua-shadow: inset 0 -2px 4px 1px rgba(17, 110, 231, .6),
+        inset 0 -4px 4px 1px rgba(141, 227, 252, 1),
+        inset 0 0 2px 1px rgba(255, 255, 255, .2),
+        0 1px 4px 1px rgba(17, 110, 231, .2),
+        0 1px 4px 1px rgba(0, 0, 0, .1);
+}
+
+body {
+    font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-image: var(--aluminum);
+    color: var(--text-color);
+}
+
+#splash-screen {
+    background-image: var(--plastic);
+}
+
+header {
+    background-image: var(--aluminum);
+    border-bottom: 1px solid #999;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+    color: #444;
+    text-shadow: 0 1px 0 white;
+    font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.top-bar {
+    background-image: var(--aluminum);
+    border-bottom: 1px solid #999;
+}
+
+button {
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    border: none;
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-image: var(--button-shine);
+    border-radius: 10px 10px 0 0;
+}
+
+button:hover:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button) {
+    background-image: linear-gradient(to bottom, #4d4d4d 0%, #5e5e5e 49%, #727272 50%, #8b8b8b 100%);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button) {
+    background-image: linear-gradient(to bottom, #5e5e5e 0%, #727272 49%, #8b8b8b 50%, #a7a7a7 100%);
+    color: white;
+    transform: translateY(1px);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.fun-button {
+    position: relative;
+    border: 1px solid #0360df;
+    border-radius: 50px;
+    padding: 8px 16px;
+    min-width: 8em;
+    background-color: #0360df;
+    background-image: var(--aqua-background);
+    box-shadow: var(--aqua-shadow);
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 1px #116ee7;
+    transition-property: border-color, transform, background-color;
+    transition-duration: .2s;
+    margin: 0 8px;
+}
+
+.fun-button::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    width: 80%;
+    height: 40%;
+    background-image: linear-gradient(to bottom, #f4feff, transparent);
+    opacity: .75;
+}
+
+.fun-button:hover {
+    transform: scale(1.04);
+}
+
+.fun-button:active {
+    border-color: #0048d5;
+    transform: scale(.96);
+    background-color: #0048d5;
+}
+
+.count-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    border: none;
+}
+
+#play-button {
+    border: 1px solid #0360df;
+    border-radius: 50px;
+    padding: 8px 16px;
+    min-width: 8em;
+    background-color: #0360df;
+    background-image: var(--aqua-background);
+    box-shadow: var(--aqua-shadow);
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 1px #116ee7;
+    transition-property: border-color, transform, background-color;
+    transition-duration: .2s;
+}
+
+#play-button:hover {
+    transform: scale(1.04);
+}
+
+#play-button:active {
+    border-color: #0048d5;
+    transform: scale(.96);
+    background-color: #0048d5;
+}
+
+#patterns-holder {
+    border-left: #c0c0c0 2px solid;
+}
+
+#main-view {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+#bpm-text-field {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: white;
+    color: var(--text-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.input {
+    font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.track {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.track:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.track input {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.side-bar {
+    background-image: var(--plastic);
+    border-left: 1px solid #999;
+}
+
+#instrument-list,
+#browser {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#instrument-list p {
+    border-bottom: 1px solid #eee;
+    border-radius: 3px;
+}
+
+#instrument-list p:hover {
+    background-color: #f5f5f5;
+    color: var(--text-color);
+}
+
+#add-pattern-button,
+#add-track-button {
+    color: white;
+    background-color: #299c37;
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #a1fc8d, transparent);
+    margin: 0 4px;
+}
+
+#add-pattern-button:hover,
+#add-track-button:hover {
+    background-color: #3dbf4a;
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #a1fc8d, transparent);
+}
+
+#remove-pattern-button,
+#remove-track-button {
+    background-color: #d9534f;
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #fc8d8d, transparent);
+}
+
+#remove-pattern-button:hover,
+#remove-track-button:hover {
+    background-color: #f76562;
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #fc8d8d, transparent);
+}
+
+#pattern-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    margin: 0 4px;
+    border: none;
+    color: var(--text-color);
+}
+
+#pattern-button:hover {
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #fcf38d, transparent);
+}
+
+#pattern-button.selected {
+    background-color: #dbb344;
+    background-image: radial-gradient(75% 50% at 50% 0%, #f4feff, transparent),
+        radial-gradient(75% 35% at 50% 85%, #fcf38d, transparent);
+    color: white;
+    box-shadow: 0 0 8px rgba(181, 209, 0, 0.5);
+}
+
+.theme-label {
+    color: var(--primary-color);
+    text-shadow: 0 1px 0 white;
+}
+
+.theme-selector {
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: var(--text-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-selector:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 146, 209, 0.5);
+}

@@ -20,20 +20,14 @@
 <body>
     <div id="splash-screen">
         <div class="splash-logo">
-            <lottie-player src="assets/animated_logo.json" background="transparent" speed="1" style="width: 300px; height: 300px;" autoplay></lottie-player>
+            <lottie-player src="assets/animated_logo.json" background="transparent" speed="1"
+                style="width: 300px; height: 300px;" autoplay></lottie-player>
         </div>
     </div>
 
     <header>
         <img src="assets/polytrakt_logo.png" class="logo" alt="Polytrakt">
         <div class="header-controls">
-            <div class="theme-selector-wrapper">
-                <label for="theme-selector" class="theme-label"><i class="fas fa-palette"></i></label>
-                <select id="theme-selector" class="theme-selector">
-                    <option value="default">Default</option>
-                    <option value="dark">Dark</option>
-                </select>
-            </div>
             <button id="export-button" class="fun-button"><i class="fas fa-save"></i> Save</button>
             <button id="import-button" class="fun-button"><i class="fas fa-folder-open"></i> Load</button>
         </div>
@@ -43,7 +37,7 @@
         <div class="sequencer-view">
             <div class="top-bar">
                 <button id="play-button"><i class="fas fa-play"></i> Play</button>
-                
+
                 <h3>Patterns</h3>
                 <div id="pattern-section">
                     <button id="remove-pattern-button" class="count-button"><i class="fas fa-minus"></i></button>
@@ -80,6 +74,14 @@
                 <h3>Browser</h3>
                 <div id="browser">
                 </div>
+            </div>
+            <div class="theme-selector-wrapper">
+                <label for="theme-selector" class="theme-label"><i class="fas fa-palette"></i></label>
+                <select id="theme-selector" class="theme-selector">
+                    <option value="default">Default</option>
+                    <option value="dark">Dark</option>
+                    <option value="aqua">Aqua</option>
+                </select>
             </div>
         </div>
     </main>
