@@ -22,7 +22,8 @@
 
 body {
     font-family: "Lucida Grande", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background-image: var(--aluminum);
+    background-image: url("../../assets/aqua_bg.png");
+    background-size: cover;
     color: var(--text-color);
 }
 
@@ -34,6 +35,10 @@ header {
     background-image: var(--aluminum);
     border-bottom: 1px solid #999;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    filter: drop-shadow(0 1px 2px rgba(140, 140, 140, 0.56));
 }
 
 h3 {
@@ -48,7 +53,7 @@ h3 {
 }
 
 button {
-    background: var(--primary-color);
+    background-image: linear-gradient(to bottom, #727272 0%, #4d4d4d 100%);
     color: white;
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -161,10 +166,13 @@ button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern
 }
 
 #main-view {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.532);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 #bpm-text-field {
@@ -181,14 +189,17 @@ button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern
 }
 
 .track {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.532);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .track:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
 }
 
 .track input {

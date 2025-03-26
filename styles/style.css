@@ -175,7 +175,7 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 }
 
 #play-button {
-    margin: auto;
+    margin-bottom: 30px;
     display: block;
 }
 
@@ -225,12 +225,6 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
     transition: background-color 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
-}
-
-.track:hover {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-    border-bottom: 1px solid var(--primary-light);
 }
 
 .track-buttons {
