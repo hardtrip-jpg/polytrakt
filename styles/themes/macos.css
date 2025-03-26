@@ -209,6 +209,18 @@ button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+#track-text-field.active-note {
+    background-color: #0360df;
+    background-image: var(--aqua-background);
+    color: white;
+    box-shadow: var(--aqua-shadow);
+    border: 1px solid #0360df;
+    /* transform: scale(1.05); */
+    transition-property: border-color, transform, background-color;
+    transition-duration: .2s;
+
+}
+
 .side-bar {
     background-image: var(--plastic);
     border-left: 1px solid #999;

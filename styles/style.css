@@ -260,6 +260,15 @@ input {
     outline: none;
 }
 
+#track-text-field.active-note {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 0 8px var(--primary-light);
+    border: 1px solid var(--primary-light);
+    transform: scale(1.05);
+    transition: all 0.1s ease;
+}
+
 .side-bar {
     display: flex;
     flex-direction: column;
