@@ -106,7 +106,26 @@ window.onload = function () {
 ///
 
 //Handles when note is supposed to be played. Just connects instrument and note information provided by sequencer.
-function playNote(time, note) {
+function playNote(time, noteObj) {
+    // get the actual note value
+    const note = noteObj.value;
+    
+    // find the specific text field element being played
+    const trackElement = tracks[noteObj.trackIndex];
+    const textFields = trackElement.querySelectorAll("#track-text-field");
+    const specificField = textFields[noteObj.stepIndex];
+    
+    // log both the note value and the specific DOM element
+    console.log("Playing note:", note, "Element:", specificField);
+    
+    // add highlight class to the playing note
+    specificField.classList.add("active-note");
+    
+    // remove the highlight after a delay
+    setTimeout(() => {
+        specificField.classList.remove("active-note");
+    }, 400);
+    
     if (note == "XXXX") {
         return;
     }
@@ -241,15 +260,20 @@ function setActiveSequences() {
         let currentTrackSequence = [];
         const textFields = tracks[i].querySelectorAll("#track-text-field");
         for (let x = 0; x < textFields.length; x++) {
-            currentTrackSequence.push(textFields[x].value);
+            // Store the note value and its position information
+            currentTrackSequence.push({
+                value: textFields[x].value,
+                trackIndex: i,
+                stepIndex: x
+            });
         }
-        let newSequence = new Tone.Sequence(function (time, note) {
-            playNote(time, note);
+        let newSequence = new Tone.Sequence(function (time, noteObj) {
+            playNote(time, noteObj);
             //straight quater notes
         }, currentTrackSequence, `${currentTrackSequence.length}n`);
         activeSequences.push(newSequence);
 
-        patterns[currentSelectedPattern].push(currentTrackSequence);
+        patterns[currentSelectedPattern].push(currentTrackSequence.map(noteObj => noteObj.value));
     }
     console.log(patterns);
 }
