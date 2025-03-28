@@ -80,12 +80,10 @@ window.onload = function () {
         }
     })
 
-    //Add and Remove Track buttons connect events
+    //Add and Track button connect events
     const addTrackButton = document.querySelector("#add-track-button");
     addTrackButton.addEventListener("click", createTrack);
 
-    const removeTrackButton = document.querySelector("#remove-track-button");
-    removeTrackButton.addEventListener("click", removeTrack);
 
     // Save and Load buttons
     const saveButton = document.getElementById("export-button");
@@ -137,111 +135,7 @@ function playNote(time, noteObj) {
     currentInstrument.triggerAttack(pitch, time);
 }
 
-function createTextInput(i) {
-    let newField = document.createElement("input");
-    newField.id = "track-text-field";
-    newField.type = "text";
-    newField.minLength = "4";
-    newField.maxLength = "4";
-    newField.dataset.track = `track-${i}`;
-    newField.value = "XXXX";
-    newField.addEventListener("click", function () {
-        stop();
-        this.value = "";
-    });
-    newField.addEventListener("blur", checkInputedText);
-    // setActiveSequences();
-    return newField;
-}
 
-function checkInputedText() {
-    if (this.value.length != 4) {
-        this.value = "XXXX";
-        console.log("Please enter 4 digit code");
-        return;
-    }
-
-    // setActiveSequences();
-}
-
-//Creates a new track
-function createTrack() {
-    let main = document.querySelector("#main-view");
-    let newTrack = document.createElement("div");
-    let trackNumber = tracks.length + 1;
-
-    newTrack.id = `track-${trackNumber}`;
-    newTrack.className = 'track';
-
-    // Create track buttons container
-    let buttonsDiv = document.createElement("div");
-    buttonsDiv.className = "track-buttons";
-
-    // Create track fields container
-    let fieldsDiv = document.createElement("div");
-    fieldsDiv.className = "track-fields";
-
-    // Create buttons
-    let newRemove = document.createElement("button");
-    let newAdd = document.createElement("button");
-
-    newRemove.id = 'remove-div';
-    newRemove.dataset.track = newTrack.id;
-    newRemove.textContent = "-";
-
-    //New remove div button
-    newRemove.addEventListener("click", function () {
-        console.log("remove");
-        let text_fields = fieldsDiv.querySelectorAll("#track-text-field");
-
-        if (text_fields.length > 1) {
-            text_fields[text_fields.length - 1].remove();
-
-        }
-
-        setActiveSequences();
-    });
-
-    //New add div button
-    newAdd.id = 'add-div';
-    newAdd.dataset.track = newTrack.id;
-    newAdd.textContent = "+";
-
-    newAdd.addEventListener("click", function () {
-        console.log("add");
-
-        let newD = createTextInput(trackNumber);
-        fieldsDiv.appendChild(newD);
-
-        setActiveSequences();
-    });
-
-    // Add buttons to buttons container
-    buttonsDiv.appendChild(newRemove);
-    buttonsDiv.appendChild(newAdd);
-
-    // Add text fields to fields container
-    for (let i = 0; i < 4; i++) {
-        let newText = createTextInput(trackNumber);
-        fieldsDiv.appendChild(newText);
-    }
-
-    // Add containers to track
-    newTrack.appendChild(buttonsDiv);
-    newTrack.appendChild(fieldsDiv);
-
-    main.appendChild(newTrack);
-    tracks = document.querySelectorAll(".track");
-}
-
-function removeTrack() {
-    stop();
-    if (tracks.length > 0) {
-        tracks[tracks.length - 1].remove();
-        tracks = document.querySelectorAll(".track");
-    };
-    setActiveSequences();
-}
 
 function setActiveSequences() {
     stop();
@@ -275,7 +169,7 @@ function setActiveSequences() {
 
         patterns[currentSelectedPattern].push(currentTrackSequence.map(noteObj => noteObj.value));
     }
-    console.log(patterns);
+    checkValues();
 }
 
 function stop() {

@@ -4,6 +4,7 @@ class Pattern {
     }
 }
 
+//Only called by add pattern button
 function createPattern() {
     setActiveSequences();
     patterns.push([]);
@@ -20,10 +21,12 @@ function createPattern() {
 
     loadPattern();
     updateSelectedPatternButton();
+    notify(`Created Pattern ${currentSelectedPattern}`);
 }
 
 function removePattern(){
     if (patterns.length <= 1){
+        notify("Must have at least one pattern");
         return;
     };
 

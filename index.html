@@ -6,6 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.3/Tone.js"></script>
     <script src="scripts/audiokeys.min.js"></script>
     <script src="scripts/notification.js"></script>
+    <script src="scripts/track.js"></script>
     <script src="scripts/pattern.js"></script>
     <script src="scripts/inventory.js"></script>
     <script src="scripts/logic_manager.js"></script>
@@ -61,11 +62,11 @@
                 <div class="section-header">
                     <h3>Tracks</h3>
                     <input type="text" id="bpm-text-field" size="4">
-                    <div>
-                        <button id="add-track-button" class="count-button"><i class="fas fa-plus"></i></button>
-                        <button id="remove-track-button" class="count-button"><i class="fas fa-minus"></i></button>
-                    </div>
                 </div>
+                <div id="track-holder">
+
+                </div>
+                <button id="add-track-button" class="count-button"><i class="fas fa-plus"></i></button>
             </div>
         </div>
 
