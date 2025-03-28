@@ -8,7 +8,7 @@ function createPattern() {
     setActiveSequences();
     patterns.push([]);
 
-    currentSelectedPattern += 1;
+    currentSelectedPattern = patterns.length - 1;
 
     //Set Pattern to empty (4 "XXXX" for each track)
     for (let i = 0; i < tracks.length; i++) {
@@ -26,11 +26,17 @@ function removePattern(){
     if (patterns.length <= 1){
         return;
     };
-    
-    patterns.pop();
+
+    patterns.splice(currentSelectedPattern, 1);
     let patternButtons = document.querySelectorAll("#pattern-button");
-    patternButtons[patternButtons.length - 1].remove();
+    patternButtons[currentSelectedPattern].remove();
+    notify(`Removed Pattern ${currentSelectedPattern}`);
+
     currentSelectedPattern -= 1;
+    if(currentSelectedPattern < 0){
+        currentSelectedPattern = 0;
+    }
+    rebuildPatterns();
     loadPattern();
     updateSelectedPatternButton();
 }
