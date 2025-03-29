@@ -168,12 +168,12 @@ window.onload = function () {
             playState = false;
         }
         else {
+            playState = true;
             setActiveSequences();
             for (let i = 0; i < activeSequences.length; i++) {
                 activeSequences[i].start();
             }
             this.innerHTML = 'Stop';
-            playState = true;
             Tone.getTransport().start();
             activateSequence();
         }
@@ -257,7 +257,9 @@ function setActiveSequences() {
 
         activeSequences.push(newSequence);
 
+
         patterns[currentSelectedPattern][i] = (currentTrackSequence.map(noteObj => noteObj.value));
+        console.log("current patter" + patterns[currentSelectedPattern][i]);
 
         if (playState){
             newSequence.start();
