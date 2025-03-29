@@ -24,16 +24,35 @@ let patternSequence = [0,0,0,0,0,0,0,0];
 let currentSequencePostion = 0;
 let patternSequenceManager;
 
+let heldInstrument
+let selectedInstrument
+
 
 window.onload = function () {
     Tone.Transport.bpm.value = 120;
 
-    inventory.addInstrument("samples/bass_boom.wav");
-    inventory.addInstrument("samples/kick.wav");
-    inventory.addInstrument("samples/snare.wav");
-    inventory.addInstrument("samples/hat.wav");
-    inventory.addInstrument("samples/cowbell.wav");
-    inventory.addInstrument("samples/synth.wav");
+    const inventoryButtons = document.querySelectorAll("#inventory-button");
+    inventoryButtons.forEach((x) => {
+        x.addEventListener("click",() => {
+            if (heldInstrument != null){
+                inventory.addInstrument(heldInstrument[1], Number(x.dataset.slot));
+                x.textContent = `${Number(x.dataset.slot)} - ${heldInstrument[0]}`;
+                notify(`${heldInstrument[0]} placed in ${Number(x.dataset.slot)} slot`);
+                heldInstrument = null;
+                
+            }
+            selectedInstrument = inventory.list[Number(x.dataset.slot)];
+        })
+    });
+
+    const browserButtons = document.querySelectorAll("#instrument");
+    browserButtons.forEach((x) => {
+        x.addEventListener("click", () => {
+            heldInstrument =  [x.textContent, x.dataset.link];
+            notify(`${x.textContent} selected`);
+        })
+    })
+
 
     createPattern();
     createTrack();
@@ -176,8 +195,13 @@ function playNote(time, noteObj) {
     let pitch = note[0] + note[1];
     let instrument = note[2] + note[3];
 
-    let currentInstrument = inventory.matchInstrument(instrument);
-    currentInstrument.triggerAttack(pitch, time);
+    let currentInstrument = inventory.list[Number(instrument)];
+    if(currentInstrument != "X"){
+        console.log(inventory);
+        console.log(Number(instrument))
+        console.log(currentInstrument);
+        currentInstrument.triggerAttack(pitch, time);
+    }
 }
 
 
