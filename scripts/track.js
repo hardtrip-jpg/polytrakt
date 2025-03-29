@@ -6,9 +6,10 @@ function createTextInput(i) {
     newField.maxLength = "4";
     newField.dataset.track = `track-${i}`;
     newField.value = "XXXX";
-    newField.addEventListener("click", function () {
+    newField.addEventListener("focus", function () {
         stop();
         this.value = "";
+        currentTextField = this;
     });
     newField.addEventListener("blur", checkInputedText);
     // setActiveSequences();
@@ -21,6 +22,7 @@ function checkInputedText() {
         console.log("Please enter 4 digit code");
         return;
     }
+    currentTextField = null;
 
     // setActiveSequences();
 }

@@ -9,6 +9,18 @@ const keyboard = new AudioKeys({
     rows: 1,
 })
 
+keyboard.down((key) => {
+    console.log(key);
+    console.log(Tone.Frequency(key.note, "midi").toNote());
+
+    if(selectedInstrument != "X"){
+        selectedInstrument.triggerAttack(key.frequency);
+        if(currentTextField){
+            currentTextField.value = `${Tone.Frequency(key.note, "midi").toNote()}0${selectedInstrumentID}`;
+        }
+    }
+})
+
 
 //Current Active Stuff
 let inventory = new Inventory;
@@ -24,8 +36,11 @@ let patternSequence = [0,0,0,0,0,0,0,0];
 let currentSequencePostion = 0;
 let patternSequenceManager;
 
-let heldInstrument
-let selectedInstrument
+let heldInstrument;
+let selectedInstrument;
+let selectedInstrumentID;
+
+let currentTextField;
 
 
 window.onload = function () {
@@ -34,14 +49,17 @@ window.onload = function () {
     const inventoryButtons = document.querySelectorAll("#inventory-button");
     inventoryButtons.forEach((x) => {
         x.addEventListener("click",() => {
+            const dataSlot = Number(x.dataset.slot);
             if (heldInstrument != null){
-                inventory.addInstrument(heldInstrument[1], Number(x.dataset.slot));
-                x.textContent = `${Number(x.dataset.slot)} - ${heldInstrument[0]}`;
-                notify(`${heldInstrument[0]} placed in ${Number(x.dataset.slot)} slot`);
+                inventory.addInstrument(heldInstrument[1], dataSlot, `${dataSlot} - ${heldInstrument[0]}`);
+                x.textContent = inventory.names[dataSlot];
+                notify(`${heldInstrument[0]} placed in ${dataSlot} slot`);
                 heldInstrument = null;
                 
             }
-            selectedInstrument = inventory.list[Number(x.dataset.slot)];
+            notify(`${inventory.names[dataSlot]} became current instrument`);
+            selectedInstrumentID = dataSlot;
+            selectedInstrument = inventory.list[dataSlot];
         })
     });
 
