@@ -170,12 +170,9 @@ window.onload = function () {
         else {
             playState = true;
             setActiveSequences();
-            for (let i = 0; i < activeSequences.length; i++) {
-                activeSequences[i].start();
-            }
             this.innerHTML = 'Stop';
-            Tone.getTransport().start();
             activateSequence();
+            Tone.getTransport().start();
         }
         console.log(patterns[currentSelectedPattern]);
     })
@@ -262,7 +259,7 @@ function setActiveSequences() {
         console.log("current patter" + patterns[currentSelectedPattern][i]);
 
         if (playState){
-            newSequence.start();
+            newSequence.start(0.1);
         }
     }
     // checkValues("setActiveSequence");
@@ -297,24 +294,19 @@ function stop() {
 function activateSequence(){
     patternSequenceManager = new Tone.Loop(function(time){
 
+    if ( currentSelectedPattern != patternSequence[currentSequencePostion]){
         currentSelectedPattern = patternSequence[currentSequencePostion];
         loadPattern();
         dispose();
-
-        currentSequencePostion++;
-        if (currentSequencePostion >= 8){
-            currentSequencePostion = 0;
-        }
-
-
-        console.log("huh");
-        console.log(patterns[currentSelectedPattern]);
-
         rebuildTracksFromPatterns();
-
-        console.log("what?");
-        console.log(patterns[currentSelectedPattern]);
         setActiveSequences();
+    }
+    currentSequencePostion++;
+    if (currentSequencePostion >= 8){
+        currentSequencePostion = 0;
+    }
+
+        
     }, "1n").start(0);
     Tone.getTransport().start();
 }
