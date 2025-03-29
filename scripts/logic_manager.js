@@ -177,6 +177,7 @@ window.onload = function () {
             Tone.getTransport().start();
             activateSequence();
         }
+        console.log(patterns[currentSelectedPattern]);
     })
 
 }
@@ -229,17 +230,16 @@ function setActiveSequences() {
     if (currentSelectedPattern == -1) {
         return;
     }
-    patterns[currentSelectedPattern] = [];
+    
 
-    for (let i = 0; i < activeSequences.length; i++) {
-        activeSequences[i].dispose();
-    };
-
-    activeSequences = [];
-
+    dispose();
+    setPatterns();
+    
     for (let i = 0; i < tracks.length; i++) {
+        console.log(`We looping ${i}`)
         let currentTrackSequence = [];
         const textFields = tracks[i].querySelectorAll("#track-text-field");
+
         for (let x = 0; x < textFields.length; x++) {
             // Store the note value and its position information
             currentTrackSequence.push({
@@ -248,19 +248,35 @@ function setActiveSequences() {
                 stepIndex: x
             });
         }
+
+
         let newSequence = new Tone.Sequence(function (time, noteObj) {
             playNote(time, noteObj);
             //straight quater notes
         }, currentTrackSequence, `${currentTrackSequence.length}n`);
+
         activeSequences.push(newSequence);
 
-        patterns[currentSelectedPattern].push(currentTrackSequence.map(noteObj => noteObj.value));
+        patterns[currentSelectedPattern][i] = (currentTrackSequence.map(noteObj => noteObj.value));
 
         if (playState){
             newSequence.start();
         }
     }
-    checkValues("setActiveSequence");
+    // checkValues("setActiveSequence");
+}
+
+function dispose(){
+    for (let i = 0; i < activeSequences.length; i++) {
+        activeSequences[i].dispose();
+    };
+
+    activeSequences = [];
+
+}
+
+function setPatterns(){
+    
 }
 
 function stop() {
@@ -280,16 +296,20 @@ function activateSequence(){
     patternSequenceManager = new Tone.Loop(function(time){
 
         currentSelectedPattern = patternSequence[currentSequencePostion];
+        loadPattern();
+        dispose();
+
         currentSequencePostion++;
         if (currentSequencePostion >= 8){
             currentSequencePostion = 0;
         }
 
-        updateSelectedPatternButton();
+
         console.log("huh");
         console.log(patterns[currentSelectedPattern]);
 
         rebuildTracksFromPatterns();
+
         console.log("what?");
         console.log(patterns[currentSelectedPattern]);
         setActiveSequences();

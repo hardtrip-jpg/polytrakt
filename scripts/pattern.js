@@ -15,7 +15,7 @@ function createPattern() {
     for (let i = 0; i < tracks.length; i++) {
         patterns[currentSelectedPattern].push(["XXXX", "XXXX", "XXXX", "XXXX"]);
     }
-    console.log(patterns);
+    // console.log(patterns);
 
     createPatternButton(currentSelectedPattern);
 

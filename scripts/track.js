@@ -109,10 +109,10 @@ function createTrack() {
 
     main.appendChild(newTrack);
     tracks = document.querySelectorAll(".track");
-    for(let i = 0; i < patterns.length; i++){
-        let currentPattern = patterns[i];
-        currentPattern.push(["XXXX","XXXX","XXXX","XXXX"]);
-    }
+    // for(let i = 0; i < patterns.length; i++){
+    //     let currentPattern = patterns[i];
+    //     currentPattern.push(["XXXX","XXXX","XXXX","XXXX"]);
+    // }
 }
 
 function removeTrack(id) {
