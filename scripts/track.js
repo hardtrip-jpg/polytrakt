@@ -68,8 +68,10 @@ function createTrack() {
         if (text_fields.length > 1) {
             text_fields[text_fields.length - 1].remove();
 
-        }
+        };
+        notify(`Removed Div on Track ${trackNumber}`);
 
+        stop();
         setActiveSequences();
     });
 
@@ -82,7 +84,9 @@ function createTrack() {
 
         let newD = createTextInput(trackNumber);
         fieldsDiv.appendChild(newD);
+        notify(`Added Div on Track ${trackNumber}`);
 
+        stop();
         setActiveSequences();
     });
 
@@ -103,7 +107,6 @@ function createTrack() {
 
     main.appendChild(newTrack);
     tracks = document.querySelectorAll(".track");
-    notify(`Added Track ${trackNumber}`);
     for(let i = 0; i < patterns.length; i++){
         let currentPattern = patterns[i];
         currentPattern.push(["XXXX","XXXX","XXXX","XXXX"]);

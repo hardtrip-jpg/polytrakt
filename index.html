@@ -28,7 +28,7 @@
     </div>
 
     <header>
-        <img src="assets/polytrakt_logo.png" class="logo" alt="Polytrakt">
+        <img src="assets/polytrakt_logo.svg" class="logo" alt="Polytrakt">
         <div id="notification-holder"></div>
         <div class="header-controls">
             <button id="export-button" class="fun-button"><i class="fas fa-save"></i> Save</button>
@@ -56,12 +56,14 @@
                     <input type="text" id="sequence-field" maxlength="1" size="1">
                     <input type="text" id="sequence-field" maxlength="1" size="1">
                     <input type="text" id="sequence-field" maxlength="1" size="1">
+                    <button id="play-button-sequence"><i class="fas fa-play"></i> Play</button>
                 </div>
             </div>
             <div id="main-view">
                 <div class="section-header">
                     <h3>Tracks</h3>
                     <input type="text" id="bpm-text-field" size="4">
+                    <button id="play-button"><i class="fas fa-play"></i> Play</button>
                 </div>
                 <div id="track-holder">
 
@@ -71,7 +73,6 @@
         </div>
 
         <div class="side-bar">
-            <button id="play-button"><i class="fas fa-play"></i> Play</button>
             <div id="instrument-section">
                 <h3>Instruments</h3>
                 <div id="instrument-list">
