@@ -12,7 +12,9 @@ function saveProject() {
         bpm: Tone.Transport.bpm.value,
         currentPattern: currentSelectedPattern,
         patterns: patterns,
-        patternSequence: patternSequence
+        patternSequence: patternSequence,
+        inventoryNames: inventory.names,
+        inventorySamples: inventory.samples,
     };
 
     console.log(projectData);
@@ -92,14 +94,36 @@ function loadProjectData(data) {
     patternSequence = data.patternSequence || [];
 
     // Update UI to reflect loaded data
+    rebuildInventory(data);
     rebuildSequence();
     rebuildPatterns();
     rebuildTracksFromPatterns();
 }
 
+function rebuildInventory(data){
+    if (!data.inventorySamples){
+        return;
+    }
+    //Reset current inventory
+    inventory = new Inventory;
+    const inventoryButtons = document.querySelectorAll("#inventory-button");
+    console.log(inventoryButtons)
+
+    for(let i = 0; i < data.inventorySamples.length; i++){
+        inventoryButtons[i].textContent = inventoryButtons[i].dataset.slot;
+        if (data.inventorySamples[i] != "X"){
+            inventory.addInstrument(data.inventorySamples[i],i,data.inventoryNames[i]);
+            inventoryButtons[i].textContent = data.inventoryNames[i];
+        }
+    }
+
+}
+
 function rebuildSequence(){
 
 }
+
+
 
 //Rebuild the UI patterns based on loaded data
 function rebuildPatterns() {
