@@ -1,6 +1,6 @@
 class Inventory {
     constructor(){
-        this.list = []
+        this.list = ["X","X","X","X","X","X","X","X"]
     }
 
     addInstrument(instrument, id){
@@ -9,12 +9,7 @@ class Inventory {
                 C3: instrument,
             },
             }).toDestination();
-        this.list.push(new_instrument);
+        this.list[id]= new_instrument;
     }
-
-    matchInstrument(id){
-        let check = Number(id)
-        return this.list[check];
-    }
-
 }
+

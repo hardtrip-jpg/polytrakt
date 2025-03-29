@@ -28,7 +28,7 @@
     </div>
 
     <header>
-        <img src="assets/polytrakt_logo.png" class="logo" alt="Polytrakt">
+        <img src="assets/polytrakt_logo.svg" class="logo" alt="Polytrakt">
         <div id="notification-holder"></div>
         <div class="header-controls">
             <button id="export-button" class="fun-button"><i class="fas fa-save"></i> Save</button>
@@ -46,12 +46,12 @@
                     <div id="patterns-holder">
                     </div>
                 </div>
-
             </div>
             <div id="main-view">
                 <div class="section-header">
                     <h3>Tracks</h3>
                     <input type="text" id="bpm-text-field" size="4">
+                    <button id="play-button"><i class="fas fa-play"></i> Play</button>
                 </div>
                 <div id="track-holder">
 
@@ -61,21 +61,36 @@
         </div>
 
         <div class="side-bar">
-            <button id="play-button"><i class="fas fa-play"></i> Play</button>
             <div id="instrument-section">
                 <h3>Instruments</h3>
                 <div id="instrument-list">
-                    <p>Boom - 00</p>
-                    <p>Kick - 01</p>
-                    <p>Snare - 02</p>
-                    <p>Hat - 03</p>
-                    <p>Cowbell - 04</p>
-                    <p>Synth - 05</p>
+                    <button id="inventory-button" data-slot="0">0</button>
+                    <br>
+                    <button id="inventory-button" data-slot="1">1</button>
+                    <br>
+                    <button id="inventory-button" data-slot="2">2</button>
+                    <br>
+                    <button id="inventory-button" data-slot="3">3</button>
+                    <br>
+                    <button id="inventory-button" data-slot="4">4</button>
+                    <br>
+                    <button id="inventory-button" data-slot="5">5</button>
+                    <br>
+                    <button id="inventory-button" data-slot="6">6</button>
+                    <br>
+                    <button id="inventory-button" data-slot="7">7</button>
+                    <br>
                 </div>
             </div>
             <div id="browser-section">
                 <h3>Browser</h3>
                 <div id="browser">
+                    <button id="instrument" data-link="samples/kick.wav">Kick</button>
+                    <button id="instrument" data-link="samples/snare.wav">Snare</button>
+                    <button id="instrument" data-link="samples/hat.wav">Hat</button>
+                    <button id="instrument" data-link="samples/cowbell.wav">Cowbell</button>
+                    <button id="instrument" data-link="samples/synth.wav">Synth</button>
+                    <button id="instrument" data-link="samples/bass_boom.wav">Bass</button>
                 </div>
             </div>
             <div class="theme-selector-wrapper">

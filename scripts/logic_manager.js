@@ -1,4 +1,5 @@
 "use strict";
+
 let playState = false
 
 const timekeeper = Tone.getTransport();
@@ -19,18 +20,39 @@ let playButton;
 
 let patterns = [];
 
-let patternSequence = [];
+let patternSequence = [0,0,0,0,0,0,0,0];
+let currentSequencePostion = 0;
+let patternSequenceManager;
+
+let heldInstrument
+let selectedInstrument
 
 
 window.onload = function () {
     Tone.Transport.bpm.value = 120;
 
-    inventory.addInstrument("samples/bass_boom.wav");
-    inventory.addInstrument("samples/kick.wav");
-    inventory.addInstrument("samples/snare.wav");
-    inventory.addInstrument("samples/hat.wav");
-    inventory.addInstrument("samples/cowbell.wav");
-    inventory.addInstrument("samples/synth.wav");
+    const inventoryButtons = document.querySelectorAll("#inventory-button");
+    inventoryButtons.forEach((x) => {
+        x.addEventListener("click",() => {
+            if (heldInstrument != null){
+                inventory.addInstrument(heldInstrument[1], Number(x.dataset.slot));
+                x.textContent = `${Number(x.dataset.slot)} - ${heldInstrument[0]}`;
+                notify(`${heldInstrument[0]} placed in ${Number(x.dataset.slot)} slot`);
+                heldInstrument = null;
+                
+            }
+            selectedInstrument = inventory.list[Number(x.dataset.slot)];
+        })
+    });
+
+    const browserButtons = document.querySelectorAll("#instrument");
+    browserButtons.forEach((x) => {
+        x.addEventListener("click", () => {
+            heldInstrument =  [x.textContent, x.dataset.link];
+            notify(`${x.textContent} selected`);
+        })
+    })
+
 
     createPattern();
     createTrack();
@@ -97,6 +119,48 @@ window.onload = function () {
             Tone.start();
         }
     });
+
+    const patternSequencers = document.querySelectorAll("#sequence-field");
+    patternSequencers.forEach((x) => {
+        x.value = "0";
+        x.addEventListener("blur", function(){
+            stop();
+            const inputedText = Number(this.value);
+            console.log(inputedText)
+            if (inputedText >= patterns.length || inputedText <= 0 || !inputedText){
+                this.value = "0";
+                notify("Please sequence an existing pattern");
+            }
+            for(let i = 0; i < patternSequencers.length; i++){
+                patternSequence[i] = Number(patternSequencers[i].value);
+            }
+        })
+    });
+
+    const sequencePlay = document.querySelector("#play-button-sequence");
+    sequencePlay.addEventListener("click",function() {
+        if (playState) {
+            for (let i = 0; i < activeSequences.length; i++) {
+                activeSequences[i].stop();
+            }
+            patternSequenceManager.stop();
+            currentSequencePostion = 0;
+            this.innerHTML = 'Play';
+            Tone.getTransport().stop();
+            playState = false;
+        }
+        else {
+            setActiveSequences();
+            for (let i = 0; i < activeSequences.length; i++) {
+                activeSequences[i].start();
+            }
+            this.innerHTML = 'Stop';
+            playState = true;
+            Tone.getTransport().start();
+            activateSequence();
+        }
+    })
+
 }
 
 ///
@@ -122,7 +186,7 @@ function playNote(time, noteObj) {
     // remove the highlight after a delay
     setTimeout(() => {
         specificField.classList.remove("active-note");
-    }, 400);
+    }, 300);
     
     if (note == "XXXX") {
         return;
@@ -131,14 +195,19 @@ function playNote(time, noteObj) {
     let pitch = note[0] + note[1];
     let instrument = note[2] + note[3];
 
-    let currentInstrument = inventory.matchInstrument(instrument);
-    currentInstrument.triggerAttack(pitch, time);
+    let currentInstrument = inventory.list[Number(instrument)];
+    if(currentInstrument != "X"){
+        console.log(inventory);
+        console.log(Number(instrument))
+        console.log(currentInstrument);
+        currentInstrument.triggerAttack(pitch, time);
+    }
 }
 
 
 
 function setActiveSequences() {
-    stop();
+    // stop();
     if (currentSelectedPattern == -1) {
         return;
     }
@@ -168,21 +237,50 @@ function setActiveSequences() {
         activeSequences.push(newSequence);
 
         patterns[currentSelectedPattern].push(currentTrackSequence.map(noteObj => noteObj.value));
+
+        if (playState){
+            newSequence.start();
+        }
     }
-    checkValues();
+    checkValues("setActiveSequence");
 }
 
 function stop() {
     if (playState) {
-        console.log("Stopped");
+        if (patternSequenceManager){
+            patternSequenceManager.dispose();
+        }
+        currentSequencePostion = 0;
+        notify("Stopped");
         Tone.getTransport().stop();
         playState = false;
         playButton.innerHTML = '<i class="fas fa - play"></i> Play';
-        setActiveSequences();
     }
 }
 
-function checkValues() {
+function activateSequence(){
+    patternSequenceManager = new Tone.Loop(function(time){
+
+        currentSelectedPattern = patternSequence[currentSequencePostion];
+        currentSequencePostion++;
+        if (currentSequencePostion >= 8){
+            currentSequencePostion = 0;
+        }
+
+        updateSelectedPatternButton();
+        console.log("huh");
+        console.log(patterns[currentSelectedPattern]);
+
+        rebuildTracksFromPatterns();
+        console.log("what?");
+        console.log(patterns[currentSelectedPattern]);
+        setActiveSequences();
+    }, "1n").start(0);
+    Tone.getTransport().start();
+}
+
+function checkValues(who) {
+    console.log(who)
     console.log(patterns);
     console.log(patterns[currentSelectedPattern]);
 }
