@@ -314,3 +314,13 @@ button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern
     border-color: var(--primary-color);
     box-shadow: 0 0 5px rgba(0, 146, 209, 0.5);
 }
+
+#notification {
+    background: rgba(255, 255, 255, 0.532);
+    border-radius: 50px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.9px);
+    -webkit-backdrop-filter: blur(3.9px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 15px;
+}

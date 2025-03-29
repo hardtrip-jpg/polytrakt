@@ -51,16 +51,50 @@ window.onload = function () {
         x.addEventListener("click",() => {
             const dataSlot = Number(x.dataset.slot);
             if (heldInstrument != null){
-                inventory.addInstrument(heldInstrument[1], dataSlot, `${dataSlot} - ${heldInstrument[0]}`);
+                inventory.addInstrument(heldInstrument[1], dataSlot, `${heldInstrument[0]}`);
                 x.textContent = inventory.names[dataSlot];
                 notify(`${heldInstrument[0]} placed in ${dataSlot} slot`);
                 heldInstrument = null;
                 
             }
+            // Clear previously selected slot
+            inventoryButtons.forEach(btn => btn.removeAttribute('data-selected'));
+            // Mark this slot as selected
+            x.setAttribute('data-selected', 'true');
+            
             notify(`${inventory.names[dataSlot]} became current instrument`);
             selectedInstrumentID = dataSlot;
             selectedInstrument = inventory.list[dataSlot];
-        })
+        });
+        
+        // Set up drop target events
+        x.addEventListener('dragover', function(e) {
+            e.preventDefault(); // Allow drop
+        });
+
+        x.addEventListener('dragenter', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+
+        x.addEventListener('dragleave', function() {
+            this.classList.remove('drag-over');
+        });
+
+        x.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            // Get data from drag operation
+            const instrumentName = e.dataTransfer.getData('text/instrument-name');
+            const instrumentPath = e.dataTransfer.getData('text/instrument-path');
+            const dataSlot = Number(this.dataset.slot);
+            
+            // Add instrument to inventory
+            inventory.addInstrument(instrumentPath, dataSlot, instrumentName);
+            this.textContent = inventory.names[dataSlot];
+            notify(`${instrumentName} dropped into slot ${dataSlot}`);
+        });
     });
 
     const browserButtons = document.querySelectorAll("#instrument");
@@ -68,8 +102,22 @@ window.onload = function () {
         x.addEventListener("click", () => {
             heldInstrument =  [x.textContent, x.dataset.link];
             notify(`${x.textContent} selected`);
-        })
-    })
+        });
+        
+        // Set up drag source events
+        x.addEventListener('dragstart', function(e) {
+            // Add dragging class for visual feedback
+            this.classList.add('dragging');
+            
+            // Store instrument data for drop
+            e.dataTransfer.setData('text/instrument-name', this.textContent);
+            e.dataTransfer.setData('text/instrument-path', this.dataset.link);
+        });
+        
+        x.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+        });
+    });
 
 
     createPattern();

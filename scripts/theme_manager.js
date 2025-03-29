@@ -1,19 +1,19 @@
 class ThemeManager {
     constructor() {
-        this.currentTheme = 'default';
+        this.currentTheme = 'aqua';
         this.themes = {
-            'default': {
-                name: 'Default',
-                path: 'styles/themes/default.css'
-            },
-            'dark': {
-                name: 'Dark',
-                path: 'styles/themes/dark.css'
-            },
             'aqua': {
                 name: 'Aqua',
-                path: 'styles/themes/macos.css'
-            }
+                path: 'styles/themes/aqua.css'
+            },
+            'classic_light': {
+                name: 'Classic Light',
+                path: 'styles/themes/classic_light.css'
+            },
+            'classic_dark': {
+                name: 'Classic Dark',
+                path: 'styles/themes/classic_dark.css'
+            },
         };
         
         this.themeLinks = {};

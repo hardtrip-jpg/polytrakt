@@ -413,7 +413,6 @@ input {
     box-shadow: 0 2px 6px rgba(128, 179, 255, 0.3);
 }
 
-/* Theme selector styling */
 .theme-label {
     color: var(--primary-color);
 }
@@ -439,4 +438,8 @@ input {
     0% { transform: translateY(0); }
     50% { transform: translateY(2px); }
     100% { transform: translateY(0); }
+}
+
+#notification {
+    color: white;
 }
