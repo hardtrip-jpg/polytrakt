@@ -10,8 +10,20 @@ function createTextInput(i) {
         stop();
         this.value = "";
         currentTextField = this;
+        
+        // Show keyboard helper 
+        if (window.keyboardHelper) {
+            window.keyboardHelper.show();
+        }
     });
-    newField.addEventListener("blur", checkInputedText);
+    newField.addEventListener("blur", function () {
+        // Hide keyboard helper
+        if (window.keyboardHelper) {
+            window.keyboardHelper.hide();
+        }
+        checkInputedText.call(this);
+    }
+    );
     // setActiveSequences();
     return newField;
 }
@@ -19,11 +31,11 @@ function createTextInput(i) {
 function checkInputedText() {
     if (this.value.length != 4) {
         this.value = "XXXX";
-        console.log("Please enter 4 digit code");
+        notify("Invalid input");
         return;
     }
     currentTextField = null;
-
+    
     // setActiveSequences();
 }
 
