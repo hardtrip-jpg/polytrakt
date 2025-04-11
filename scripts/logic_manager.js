@@ -216,15 +216,13 @@ window.onload = function () {
             playState = false;
         }
         else {
-            setActiveSequences();
-            for (let i = 0; i < activeSequences.length; i++) {
-                activeSequences[i].start();
-            }
-            this.innerHTML = 'Stop';
             playState = true;
-            Tone.getTransport().start();
+            setActiveSequences();
+            this.innerHTML = 'Stop';
             activateSequence();
+            Tone.getTransport().start();
         }
+        console.log(patterns[currentSelectedPattern]);
     })
 
 }
@@ -277,17 +275,16 @@ function setActiveSequences() {
     if (currentSelectedPattern == -1) {
         return;
     }
-    patterns[currentSelectedPattern] = [];
+    
 
-    for (let i = 0; i < activeSequences.length; i++) {
-        activeSequences[i].dispose();
-    };
-
-    activeSequences = [];
-
+    dispose();
+    setPatterns();
+    
     for (let i = 0; i < tracks.length; i++) {
+        console.log(`We looping ${i}`)
         let currentTrackSequence = [];
         const textFields = tracks[i].querySelectorAll("#track-text-field");
+
         for (let x = 0; x < textFields.length; x++) {
             // Store the note value and its position information
             currentTrackSequence.push({
@@ -296,19 +293,37 @@ function setActiveSequences() {
                 stepIndex: x
             });
         }
+
+
         let newSequence = new Tone.Sequence(function (time, noteObj) {
             playNote(time, noteObj);
             //straight quater notes
         }, currentTrackSequence, `${currentTrackSequence.length}n`);
+
         activeSequences.push(newSequence);
 
-        patterns[currentSelectedPattern].push(currentTrackSequence.map(noteObj => noteObj.value));
+
+        patterns[currentSelectedPattern][i] = (currentTrackSequence.map(noteObj => noteObj.value));
+        console.log("current patter" + patterns[currentSelectedPattern][i]);
 
         if (playState){
-            newSequence.start();
+            newSequence.start(0.1);
         }
     }
-    checkValues("setActiveSequence");
+    // checkValues("setActiveSequence");
+}
+
+function dispose(){
+    for (let i = 0; i < activeSequences.length; i++) {
+        activeSequences[i].dispose();
+    };
+
+    activeSequences = [];
+
+}
+
+function setPatterns(){
+    
 }
 
 function stop() {
@@ -327,20 +342,19 @@ function stop() {
 function activateSequence(){
     patternSequenceManager = new Tone.Loop(function(time){
 
+    if ( currentSelectedPattern != patternSequence[currentSequencePostion]){
         currentSelectedPattern = patternSequence[currentSequencePostion];
-        currentSequencePostion++;
-        if (currentSequencePostion >= 8){
-            currentSequencePostion = 0;
-        }
-
-        updateSelectedPatternButton();
-        console.log("huh");
-        console.log(patterns[currentSelectedPattern]);
-
+        loadPattern();
+        dispose();
         rebuildTracksFromPatterns();
-        console.log("what?");
-        console.log(patterns[currentSelectedPattern]);
         setActiveSequences();
+    }
+    currentSequencePostion++;
+    if (currentSequencePostion >= 8){
+        currentSequencePostion = 0;
+    }
+
+        
     }, "1n").start(0);
     Tone.getTransport().start();
 }

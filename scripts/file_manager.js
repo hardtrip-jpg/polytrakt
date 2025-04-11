@@ -154,8 +154,11 @@ function rebuildTracksFromPatterns() {
     }
 
     // Create tracks based on pattern data
+    console.log("mama");
+    console.log(patterns[currentSelectedPattern]);
     patterns[currentSelectedPattern].forEach(trackSequence => {
         const trackIndex = tracks.length;
+        console.log("pee")
         createTrack();
 
         // Get the track we just created
