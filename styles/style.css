@@ -528,3 +528,43 @@ input {
     color: #666;
     margin-top: 10px;
 }
+
+#pattern-sequencer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#pattern-sequencer input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    margin: 0 4px;
+}
+
+#pattern-sequencer input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 3px var(--primary-light);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+#play-button-sequence {
+    margin-left: 10px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    transition: all 0.15s ease;
+}
+
+#play-button-sequence:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+#play-button-sequence:active {
+    transform: translateY(1px);
+}

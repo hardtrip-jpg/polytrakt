@@ -324,3 +324,34 @@ button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 15px;
 }
+
+#pattern-sequencer input {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#play-button-sequence {
+    border: 1px solid #0360df;
+    border-radius: 50px;
+    padding: 8px 16px;
+    background-color: #0360df;
+    background-image: var(--aqua-background);
+    box-shadow: var(--aqua-shadow);
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 1px #116ee7;
+    transition-property: border-color, transform, background-color;
+    transition-duration: .2s;
+}
+
+#play-button-sequence:hover {
+    transform: scale(1.04);
+}
+
+#play-button-sequence:active {
+    border-color: #0048d5;
+    transform: scale(.96);
+    background-color: #0048d5;
+}
