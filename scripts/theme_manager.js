@@ -87,7 +87,7 @@ class ThemeManager {
         if (savedTheme && this.themes[savedTheme]) {
             this.switchTheme(savedTheme);
         } else {
-            this.switchTheme('default');
+            this.switchTheme('aqua');
         }
     }
 }
