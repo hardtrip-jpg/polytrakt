@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <script src="scripts/theme_manager.js" defer></script>
+    <script src="scripts/help_modal.js" defer></script>
 </head>
 
 <body>
@@ -31,6 +32,7 @@
         <img src="assets/polytrakt_logo.svg" class="logo" alt="Polytrakt">
         <div id="notification-holder"></div>
         <div class="header-controls">
+            <button id="help-button" class="fun-button" title="Help"><i class="fas fa-question-circle"></i></button>
             <button id="export-button" class="fun-button"><i class="fas fa-save"></i> Save</button>
             <button id="import-button" class="fun-button"><i class="fas fa-folder-open"></i> Load</button>
         </div>
@@ -115,6 +117,73 @@
             </div>
         </div>
     </main>
+
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-help-modal">&times;</span>
+            <h2>Help</h2>
+            <div class="help-sections">
+                <div class="help-tabs">
+                    <button class="help-tab" data-section="overview">Overview</button>
+                    <button class="help-tab" data-section="patterns">Patterns</button>
+                    <button class="help-tab" data-section="tracks">Tracks</button>
+                    <button class="help-tab" data-section="instruments">Instruments</button>
+                    <button class="help-tab" data-section="keyboard">Musical Typing</button>
+                    <button class="help-tab" data-section="saving">Saving & Loading</button>
+                    <button class="help-tab" data-section="theming">Themes</button>
+                </div>
+                <div class="help-content" id="help-section-overview">
+                    <h3>Overview</h3>
+                    <p>PolyTrakt is a polyrhythmic tracker and drum sequencer. Compose music by creating patterns, arranging tracks, and assigning instruments. Use the musical typing keyboard or your mouse to enter notes.</p>
+                </div>
+                <div class="help-content" id="help-section-patterns" style="display:none">
+                    <h3>Patterns</h3>
+                    <ul>
+                        <li>Patterns are groups of tracks. Use the <b>+</b> and <b>-</b> buttons to add or remove patterns.</li>
+                        <li>Switch between patterns using the pattern buttons.</li>
+                        <li>Sequence patterns in the Pattern Sequencer row.</li>
+                    </ul>
+                </div>
+                <div class="help-content" id="help-section-tracks" style="display:none">
+                    <h3>Tracks</h3>
+                    <ul>
+                        <li>Each track is a row in the sequencer. Add or remove tracks with the <b>+</b> and <b>-</b> buttons.</li>
+                        <li>Each track contains equal divisions of note fields where you can input instrument triggers.</li>
+                        <li>Use the <b>+</b> and <b>-</b> buttons on each track to add/remove divisions.</li>
+                    </ul>
+                </div>
+                <div class="help-content" id="help-section-instruments" style="display:none">
+                    <h3>Instruments</h3>
+                    <ul>
+                        <li>Drag instruments from the Browser to the Instrument slots, or click to select and assign.</li>
+                        <li>Click an instrument slot to make it the active instrument for musical typing.</li>
+                    </ul>
+                </div>
+                <div class="help-content" id="help-section-keyboard" style="display:none">
+                    <h3>Musical Typing</h3>
+                    <ul>
+                        <li>Click a note in a track and use your computer keyboard to enter notes.</li>
+                        <li>Use the middle keyboard row for notes. Adjust octaves with <b>Z</b> and <b>X</b>.</li>
+                        <li>The keyboard helper at the bottom shows the mapping.</li>
+                    </ul>
+                </div>
+                <div class="help-content" id="help-section-saving" style="display:none">
+                    <h3>Saving & Loading</h3>
+                    <ul>
+                        <li>Click <b>Save</b> to download your project as a JSON file.</li>
+                        <li>Click <b>Load</b> to import a previously saved project.</li>
+                    </ul>
+                </div>
+                <div class="help-content" id="help-section-theming" style="display:none">
+                    <h3>Themes</h3>
+                    <ul>
+                        <li>Choose a theme from the palette menu in the sidebar.</li>
+                        <li>Your theme preference is saved automatically.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
