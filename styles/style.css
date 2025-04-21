@@ -8,6 +8,7 @@
     --card-bg: white;
     --text-color: #333;
     --border-color: #e0e0e0;
+    --base-font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 @font-face {
@@ -21,7 +22,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: var(--base-font-stack);
     margin: 0;
     padding: 0;
     background-color: var(--bg-color);
@@ -51,6 +52,10 @@ main {
 
 .logo object, .splash-logo object {
     display: none;
+}
+
+button {
+    cursor: pointer;
 }
 
 .splash-logo {
@@ -99,8 +104,12 @@ main {
     width: 100%;
 }
 
-header {
+header, .top-bar, .side-bar, #main-view, .track, .keyboard-helper, .modal-content, #instrument-list, #browser {
     background: var(--card-bg);
+    transition: background-color 0.3s ease;
+}
+
+header {
     color: var(--text-color);
     text-align: left;
     padding: 10px 15px;
@@ -109,7 +118,6 @@ header {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s ease;
     border-bottom: 2px solid var(--primary-color);
 }
 
@@ -132,10 +140,8 @@ h3 {
 }
 
 .top-bar {
-    background: var(--card-bg);
     border-bottom: 2px solid var(--border-color);
     padding: 15px 20px;
-    transition: background-color 0.3s ease;
 }
 
 .section-header {
@@ -150,19 +156,13 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
     animation: buttonPress 0.2s ease;
 }
 
-/* .fun-button {
-    background: var(--primary-color);
-    color: white;
-    border-bottom: 3px solid var(--primary-dark);
-    border-right: 1px solid var(--primary-dark);
-    transform: translateY(0);
-    transition: all 0.2s ease;
-} */
-
-.count-button {
+.count-button, #pattern-button {
     width: 36px;
     height: 36px;
     padding: 0;
+}
+
+.count-button {
     transition: all 0.15s ease;
 }
 
@@ -170,12 +170,11 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
     transform: translateY(-1px);
 }
 
-.count-button:active {
+.count-button:active, #pattern-button:active, #play-button-sequence:active {
     transform: translateY(1px);
 }
 
 #play-button {
-    /* margin-bottom: 30px; */
     display: block;
 }
 
@@ -196,19 +195,17 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
     display: flex;
     flex-direction: column;
     margin: 15px;
-    background-color: var(--card-bg);
     border: none;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
     padding: 20px;
     height: fit-content;
-    transition: background-color 0.3s ease;
     overflow: scroll;
-
 }
 
 #bpm-text-field {
     border: none;
-    border-bottom: 2px solid #80b3ff;
+    border-bottom: 2px solid var(--primary-color);
+    border-left: none;
     font-size: 16px;
     padding: 5px;
     margin: 0 15px;
@@ -219,12 +216,9 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 .track {
     display: flex;
     margin-bottom: 15px;
-    background: var(--card-bg);
     border-left: 4px solid var(--primary-color);
-    border-bottom: 1px solid var(--border-color);
     padding: 12px;
     justify-content: space-between;
-    transition: background-color 0.3s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
 }
@@ -245,13 +239,12 @@ button:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button
 }
 
 input {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: var(--base-font-stack);
 }
 
 .track input {
     margin-right: 8px;
     width: 100%;
-    border: none;
     border: 1px solid #ddd;
     padding: 8px 4px;
     transition: border-color 0.3s;
@@ -274,11 +267,9 @@ input {
 .side-bar {
     display: flex;
     flex-direction: column;
-    background: var(--card-bg);
-    border-left: 2px solid var(--border-color);
     padding: 20px;
     width: 20%;
-    transition: background-color 0.3s ease;
+    border-bottom: none;
 }
 
 #instrument-section, #browser-section {
@@ -289,7 +280,6 @@ input {
     background-color: rgba(0,0,0,0.05);
     border: none;
     padding: 12px;
-    transition: background-color 0.3s ease;
 }
 
 #instrument-list p {
@@ -340,13 +330,16 @@ input {
     border: 2px dashed var(--primary-color);
 }
 
-#add-pattern-button, #add-track-button {
+#add-pattern-button, #add-track-button, #play-button-sequence {
     background: var(--primary-color);
     color: white;
+}
+
+#add-pattern-button, #add-track-button {
     min-height: 36px;
 }
 
-#remove-pattern-button, #remove-track-button {
+#remove-pattern-button, #remove-track-button, #pattern-button {
     background: var(--border-color);
 }
 
@@ -355,14 +348,11 @@ input {
 }
 
 #pattern-button {
-    width: 36px;
-    height: 36px;
-    padding: 0;
     margin: 0 4px;
-    background: var(--border-color);
     color: var(--text-color);
     font-weight: bold;
     transition: all 0.3s ease;
+    border: none;
 }
 
 #pattern-button:hover {
@@ -372,7 +362,6 @@ input {
 }
 
 #pattern-button:active {
-    transform: translateY(1px);
     border-bottom: 1px solid #ccc;
 }
 
@@ -380,9 +369,8 @@ input {
     background: var(--primary-color);
     color: white;
     transform: none;
-    box-shadow: none;
-    border: none;
     box-shadow: 0 2px 6px rgba(128, 179, 255, 0.3);
+    border: none;
 }
 
 @keyframes buttonPress {
@@ -445,7 +433,6 @@ input {
     background: var(--primary-color);
     color: var(--text-color);
     padding: 10px;
-    
 }
 
 .keyboard-helper {
@@ -453,7 +440,6 @@ input {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--card-bg);
     border: 2px solid var(--primary-color);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -554,19 +540,9 @@ input {
 
 #play-button-sequence {
     margin-left: 10px;
-    background: var(--primary-color);
-    color: white;
     padding: 8px 16px;
     transition: all 0.15s ease;
-}
-
-#play-button-sequence:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-#play-button-sequence:active {
-    transform: translateY(1px);
+    border: none;
 }
 
 .modal {
@@ -585,7 +561,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: var(--card-bg, #fff);
     margin: 60px auto;
     padding: 20px;
     border-radius: 10px;
@@ -594,6 +569,7 @@ input {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
     position: relative;
     color: var(--text-color);
+    border: none;
 }
 
 .modal-content h2 {
@@ -649,9 +625,9 @@ input {
 .help-content {
     flex: 1;
     padding: 10px;
-    background: var(--card-bg, #fff);
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
 }
 
 .help-content h3 {
@@ -668,75 +644,7 @@ input {
     margin-bottom: 10px;
 }
 
-@media (max-width: 600px) {
-    .modal-content {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .help-sections {
-        flex-direction: column;
-    }
-
-    .help-tabs {
-        flex-direction: row;
-        gap: 5px;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color, #e0e0e0);
-        padding-right: 0;
-        padding-bottom: 10px;
-    }
-
-    .help-tab {
-        padding: 8px 10px;
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .help-content {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 600px) {
-    .modal-content {
-        width: 99%;
-        padding: 10px 2vw;
-        flex-direction: column;
-    }
-    .help-sections {
-        flex-direction: column;
-    }
-    .help-tabs {
-        flex-direction: row;
-        min-width: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color, #e0e0e0);
-        width: 100%;
-        overflow-x: auto;
-    }
-    .help-tab {
-        padding: 8px 10px;
-        font-size: 13px;
-        border-radius: 0;
-        border-right: none;
-        border-bottom: 3px solid transparent;
-        width: auto;
-        min-width: 80px;
-        text-align: center;
-    }
-    .help-tab.active,
-    .help-tab:focus {
-        border-bottom: 3px solid var(--primary-color, #80b3ff);
-        border-right: none;
-    }
-    .help-content {
-        padding: 8px 2px 0 2px;
-    }
-}
-
 #help-button {
     width: fit-content;
     min-width: 0;
-
 }

@@ -1,0 +1,30 @@
+{
+    "overview": {
+        "title": "Overview",
+        "content": "<p>PolyTrakt is a polyrhythmic tracker and drum sequencer. Compose music by creating patterns, arranging tracks, and assigning instruments. Use the musical typing keyboard or your mouse to enter notes.</p>"
+    },
+    "patterns": {
+        "title": "Patterns",
+        "content": "<ul><li>Patterns are groups of tracks. Use the <b>+</b> and <b>-</b> buttons to add or remove patterns.</li><li>Switch between patterns using the pattern buttons.</li><li>Sequence patterns in the Pattern Sequencer row.</li></ul>"
+    },
+    "tracks": {
+        "title": "Tracks",
+        "content": "<ul><li>Each track is a row in the sequencer. Add or remove tracks with the <b>+</b> and <b>-</b> buttons.</li><li>Each track contains equal divisions of note fields where you can input instrument triggers.</li><li>Use the <b>+</b> and <b>-</b> buttons on each track to add/remove divisions.</li></ul>"
+    },
+    "instruments": {
+        "title": "Instruments",
+        "content": "<ul><li>Drag instruments from the Browser to the Instrument slots, or click to select and assign.</li><li>Click an instrument slot to make it the active instrument for musical typing.</li></ul>"
+    },
+    "keyboard": {
+        "title": "Musical Typing",
+        "content": "<ul><li>Click a note in a track and use your computer keyboard to enter notes.</li><li>Use the middle keyboard row for notes. Adjust octaves with <b>Z</b> and <b>X</b>.</li><li>The keyboard helper at the bottom shows the mapping.</li></ul>"
+    },
+    "saving": {
+        "title": "Saving & Loading",
+        "content": "<ul><li>Click <b>Save</b> to download your project as a JSON file.</li><li>Click <b>Load</b> to import a previously saved project.</li></ul>"
+    },
+    "theming": {
+        "title": "Themes",
+        "content": "<ul><li>Choose a theme from the palette menu in the sidebar.</li><li>Your theme preference is saved automatically.</li></ul>"
+    }
+}

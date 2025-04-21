@@ -75,14 +75,14 @@ button:before {
     border-radius: 10px 10px 0 0;
 }
 
-button:hover:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button):not(.help-tab) {
+button:hover:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button):not(.help-tab):not(#play-button-sequence) {
     background-image: linear-gradient(to bottom, #4d4d4d 0%, #5e5e5e 49%, #727272 50%, #8b8b8b 100%);
     color: white;
     transform: translateY(-1px);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button) {
+button:active:not(.fun-button):not(.count-button):not(#play-button):not(#pattern-button):not(.help-tab):not(#play-button-sequence) {
     background-image: linear-gradient(to bottom, #5e5e5e 0%, #727272 49%, #8b8b8b 50%, #a7a7a7 100%);
     color: white;
     transform: translateY(1px);
