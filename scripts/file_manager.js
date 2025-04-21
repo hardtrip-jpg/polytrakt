@@ -120,10 +120,16 @@ function rebuildInventory(data){
 }
 
 function rebuildSequence(){
-
+    // update the pattern sequencer fields with the loaded patternSequence
+    const sequenceFields = document.querySelectorAll("#pattern-sequencer #sequence-field");
+    for (let i = 0; i < sequenceFields.length; i++) {
+        if (patternSequence && typeof patternSequence[i] !== "undefined") {
+            sequenceFields[i].value = patternSequence[i];
+        } else {
+            sequenceFields[i].value = "0";
+        }
+    }
 }
-
-
 
 //Rebuild the UI patterns based on loaded data
 function rebuildPatterns() {
