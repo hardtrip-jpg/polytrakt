@@ -74,10 +74,10 @@ function loadPattern() {
         textFields = tracks[i].querySelectorAll("#track-text-field");
         for (let x = 0; x < textFields.length; x++) {
 
-            textFields[x].value = patterns[currentSelectedPattern][i][x];
+            textFields[x].dataset.noteVal = patterns[currentSelectedPattern][i][x];
         }
     }
-
+    updateNoteValues();
     setActiveSequences();
     console.log(`Set to Pattern ${currentSelectedPattern}`);
     updateSelectedPatternButton();

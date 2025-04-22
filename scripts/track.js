@@ -6,9 +6,11 @@ function createTextInput(i) {
     newField.maxLength = "4";
     newField.dataset.track = `track-${i}`;
     newField.value = "XXXX";
+    newField.dataset.noteVal = "XXXX";
     newField.addEventListener("focus", function () {
         stop();
         this.value = "";
+        this.dataset.noteVal = "";
         currentTextField = this;
         
         // Show keyboard helper 
@@ -24,19 +26,20 @@ function createTextInput(i) {
         checkInputedText.call(this);
     }
     );
-    // setActiveSequences();
     return newField;
 }
 
 function checkInputedText() {
-    if (this.value.length != 4) {
+    console.log(this.dataset.noteVal)
+    if (this.dataset.noteVal.length != 4 || this.dataset.noteVal == "XXXX") {
         this.value = "XXXX";
+        this.dataset.noteVal = "XXXX";
         notify("Invalid input");
         return;
     }
+
     currentTextField = null;
     
-    // setActiveSequences();
 }
 
 //Creates a new track
@@ -141,4 +144,20 @@ function removeTrack(id) {
     }
     notify(`Removed Track ${id + 1}`);
     rebuildTracksFromPatterns();
+}
+
+function updateNoteValues(){
+    let allNotes = document.querySelectorAll("#track-text-field");
+    for(let i = 0; i < allNotes.length; i++){
+        if (allNotes[i].dataset.noteVal != "XXXX"){
+            let newVal = "";
+            newVal += allNotes[i].dataset.noteVal.slice(0,2);
+            let invIndex = Number(allNotes[i].dataset.noteVal.slice(2,4));
+            newVal += ` - ${inventory.names[invIndex]}`;
+            allNotes[i].value = newVal;
+        }
+        else{
+            allNotes[i].value = "XXXX"
+        }
+    }
 }

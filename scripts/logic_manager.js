@@ -16,7 +16,8 @@ keyboard.down((key) => {
     if(selectedInstrument != "X"){
         selectedInstrument.triggerAttack(key.frequency);
         if(currentTextField){
-            currentTextField.value = `${Tone.Frequency(key.note, "midi").toNote()}0${selectedInstrumentID}`;
+            currentTextField.dataset.noteVal = `${Tone.Frequency(key.note, "midi").toNote()}0${selectedInstrumentID}`;
+            currentTextField.value = `${Tone.Frequency(key.note, "midi").toNote()} - ${inventory.names[selectedInstrumentID]}`;
         }
     }
 })
@@ -65,6 +66,7 @@ window.onload = function () {
             notify(`${inventory.names[dataSlot]} became current instrument`);
             selectedInstrumentID = dataSlot;
             selectedInstrument = inventory.list[dataSlot];
+            updateNoteValues();
         });
         
         // Set up drop target events
@@ -93,6 +95,7 @@ window.onload = function () {
             // Add instrument to inventory
             inventory.addInstrument(instrumentPath, dataSlot, instrumentName);
             this.textContent = inventory.names[dataSlot];
+            updateNoteValues();
             notify(`${instrumentName} dropped into slot ${dataSlot}`);
         });
     });
@@ -288,7 +291,7 @@ function setActiveSequences() {
         for (let x = 0; x < textFields.length; x++) {
             // Store the note value and its position information
             currentTrackSequence.push({
-                value: textFields[x].value,
+                value: textFields[x].dataset.noteVal,
                 trackIndex: i,
                 stepIndex: x
             });
@@ -304,7 +307,7 @@ function setActiveSequences() {
 
 
         patterns[currentSelectedPattern][i] = (currentTrackSequence.map(noteObj => noteObj.value));
-        console.log("current patter" + patterns[currentSelectedPattern][i]);
+        console.log("current pattern" + patterns[currentSelectedPattern][i]);
 
         if (playState){
             newSequence.start(0.1);
