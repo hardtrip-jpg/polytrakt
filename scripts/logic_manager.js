@@ -228,6 +228,8 @@ window.onload = function () {
         console.log(patterns[currentSelectedPattern]);
     })
 
+    
+
 }
 
 ///

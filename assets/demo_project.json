@@ -1,0 +1,77 @@
+{
+  "bpm": 120,
+  "currentPattern": 0,
+  "patterns": [
+    [
+      [
+        "C400",
+        "C301",
+        "C400",
+        "C301"
+      ],
+      [
+        "XXXX",
+        "C302",
+        "C302",
+        "C302",
+        "XXXX",
+        "C302"
+      ],
+      [
+        "C304",
+        "C304",
+        "C304"
+      ]
+    ],
+    [
+      [
+        "C302",
+        "XXXX",
+        "C302"
+      ],
+      [
+        "C304",
+        "XXXX",
+        "C304",
+        "XXXX",
+        "C304"
+      ],
+      [
+        "C400",
+        "C401",
+        "C400",
+        "C401"
+      ]
+    ]
+  ],
+  "patternSequence": [
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0
+  ],
+  "inventoryNames": [
+    "Kick",
+    "Snare",
+    "Hat",
+    "X",
+    "Cowbell",
+    "X",
+    "X",
+    "X"
+  ],
+  "inventorySamples": [
+    "samples/kick.wav",
+    "samples/snare.wav",
+    "samples/hat.wav",
+    "X",
+    "samples/cowbell.wav",
+    "X",
+    "X",
+    "X"
+  ]
+}
