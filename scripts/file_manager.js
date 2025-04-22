@@ -133,7 +133,6 @@ function rebuildSequence(){
 
 //Rebuild the UI patterns based on loaded data
 function rebuildPatterns() {
-    const matchView = document.querySelector("#main-view");
     const existingPatterns = document.querySelectorAll("#pattern-button")
     existingPatterns.forEach(button => button.remove());
 
@@ -160,11 +159,9 @@ function rebuildTracksFromPatterns() {
     }
 
     // Create tracks based on pattern data
-    console.log("mama");
     console.log(patterns[currentSelectedPattern]);
     patterns[currentSelectedPattern].forEach(trackSequence => {
         const trackIndex = tracks.length;
-        console.log("pee")
         createTrack();
 
         // Get the track we just created
@@ -178,9 +175,10 @@ function rebuildTracksFromPatterns() {
         // Add text fields based on pattern data
         trackSequence.forEach(noteValue => {
             const textField = createTextInput(trackIndex + 1);
-            textField.value = noteValue;
+            textField.dataset.noteVal = noteValue;
             fieldsDiv.appendChild(textField);
         });
+        updateNoteValues();
     });
 
     loadPattern();
